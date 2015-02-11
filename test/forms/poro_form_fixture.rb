@@ -8,7 +8,7 @@ class Poro
   end
 end
 
-class PoroFormFixture < ActiveForm::Base
+class PoroFormFixture < ActionForm::Base
   self.main_model = :conference
   attributes :name, :city, required: true
 end

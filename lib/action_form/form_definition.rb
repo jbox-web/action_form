@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   class FormDefinition
     attr_accessor :assoc_name, :proc, :parent, :records
 

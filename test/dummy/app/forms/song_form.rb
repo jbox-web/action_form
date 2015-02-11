@@ -1,4 +1,4 @@
-class SongForm < ActiveForm::Base
+class SongForm < ActionForm::Base
   attributes :title, :length, required: true
 
   association :artist do

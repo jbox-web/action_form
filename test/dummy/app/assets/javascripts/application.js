@@ -12,5 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require active_form
+//= require action_form
 //= require_tree .

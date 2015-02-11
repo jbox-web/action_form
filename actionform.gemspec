@@ -1,13 +1,13 @@
 $:.push File.expand_path('../lib', __FILE__)
 
-require 'active_form/version'
+require 'action_form/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'active_form'
-  s.version     = ActiveForm::VERSION
+  s.name        = 'actionform'
+  s.version     = ActionForm::VERSION
   s.authors     = ['Petros Markou']
   s.email       = ['markoupetr@gmail.com']
-  s.homepage    = 'https://github.com/m-Peter/activeform'
+  s.homepage    = 'https://github.com/rails/actionform'
   s.summary     = 'Create nested forms with ease.'
   s.description = 'An alternative layer to accepts_nested_attributes_for by using Form Models.'
   s.license     = 'MIT'

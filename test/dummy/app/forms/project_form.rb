@@ -1,4 +1,4 @@
-class ProjectForm < ActiveForm::Base
+class ProjectForm < ActionForm::Base
   attributes :name, :description, :owner_id
 
   association :tasks do

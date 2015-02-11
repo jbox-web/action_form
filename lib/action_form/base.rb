@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   class Base
     include ActiveModel::Model
     include FormHelpers
