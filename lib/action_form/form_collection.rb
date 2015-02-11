@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   class FormCollection
     include ActiveModel::Validations
 

@@ -13,7 +13,7 @@ class TwoNestedCollectionsFormTest < ActiveSupport::TestCase
   test "main form provides getter method for questions collection form" do
     questions_form = @form.forms.first
 
-    assert_instance_of ActiveForm::FormCollection, questions_form
+    assert_instance_of ActionForm::FormCollection, questions_form
   end
 
   test "#represents? returns true if the argument matches the Form's association name, false otherwise" do
@@ -29,7 +29,7 @@ class TwoNestedCollectionsFormTest < ActiveSupport::TestCase
     questions = @form.questions
 
     questions.each do |form|
-      assert_instance_of ActiveForm::Form, form
+      assert_instance_of ActionForm::Form, form
       assert_instance_of Question, form.model
     end
   end
@@ -48,14 +48,14 @@ class TwoNestedCollectionsFormTest < ActiveSupport::TestCase
     assert_equal 1, questions_form.forms.size
 
     @form.questions.each do |question_form|
-      assert_instance_of ActiveForm::Form, question_form
+      assert_instance_of ActionForm::Form, question_form
       assert_instance_of Question, question_form.model
       assert_equal 1, questions_form.forms.size
 
       answers = question_form.answers
 
       answers.each do |answer_form|
-        assert_instance_of ActiveForm::Form, answer_form
+        assert_instance_of ActionForm::Form, answer_form
         assert_instance_of Answer, answer_form.model
       end
     end
@@ -68,7 +68,7 @@ class TwoNestedCollectionsFormTest < ActiveSupport::TestCase
     assert_equal 1, questions_form.models.size
 
     questions_form.each do |form|
-      assert_instance_of ActiveForm::Form, form
+      assert_instance_of ActionForm::Form, form
       assert_instance_of Question, form.model
       assert_respond_to form, :content
       assert_respond_to form, :content=
@@ -79,7 +79,7 @@ class TwoNestedCollectionsFormTest < ActiveSupport::TestCase
       assert_equal 2, answers_form.models.size
 
       answers_form.each do |answer_form|
-        assert_instance_of ActiveForm::Form, answer_form
+        assert_instance_of ActionForm::Form, answer_form
         assert_instance_of Answer, answer_form.model
         assert_respond_to answer_form, :content
         assert_respond_to answer_form, :content=

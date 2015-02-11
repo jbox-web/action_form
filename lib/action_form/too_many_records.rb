@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   class TooManyRecords < RuntimeError
   end
 end

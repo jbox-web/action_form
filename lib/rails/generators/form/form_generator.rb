@@ -4,7 +4,7 @@ require 'rails/generators/named_base'
 module Rails
   module Generators # :nodoc:
     class FormGenerator < Rails::Generators::NamedBase # :nodoc:
-      desc 'This generator creates an active form file at app/forms'
+      desc 'This generator creates an action form file at app/forms'
 
       check_class_collision suffix: 'Form'
 

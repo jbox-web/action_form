@@ -1,15 +1,15 @@
-# Active Form
+# Action Form
 
 [![Build Status](https://api.travis-ci.org/rails/activeform.svg?branch=master)](https://travis-ci.org/rails/activeform)
 
-Set your models free from the `accepts_nested_attributes_for` helper. Active Form provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
+Set your models free from the `accepts_nested_attributes_for` helper. Action Form provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
 
 ## Installation
 
 Add this line to your `Gemfile`:
 
 ```ruby
-gem 'active_form'
+gem 'actionform'
 ```
 
 ## Defining Forms
@@ -17,7 +17,7 @@ gem 'active_form'
 Consider an example where you want to create/update a conference that can have many speakers which can present a single presentation with one form submission. You start by defining a form to represent the root model, `Conference`:
 
 ```ruby
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   self.main_model = :conference
 
   attributes :name, :city
@@ -26,7 +26,7 @@ class ConferenceForm < ActiveForm::Base
 end
 ```
 
-Your form object has to subclass `ActiveForm::Base` in order to gain the necessary API. When defining the form, you have to specify the main_model the form represents with the following line:
+Your form object has to subclass `ActionForm::Base` in order to gain the necessary API. When defining the form, you have to specify the main_model the form represents with the following line:
 
 ```ruby
 self.main_model = :conference
@@ -35,14 +35,14 @@ self.main_model = :conference
 To add fields to the form, use the `attributes` or `attribute` class method. The form can also define validation rules for the model it represents. For the `presence` validation rule there is a short inline syntax:
 
 ```ruby
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   attributes :name, :city, required: true
 end
 ```
 
 ## The API
 
-The `ActiveForm::Base` class provides a simple API with only a few instance/class methods. Below are listed the instance methods:
+The `ActionForm::Base` class provides a simple API with only a few instance/class methods. Below are listed the instance methods:
 
 1. `initialize(model)` accepts an instance of the model that the form represents.
 2. `submit(params)` updates the main form's model and nested models with the posted parameters. The models are not saved/updated until you call `save`.
@@ -80,10 +80,10 @@ class ConferencesController
 end
 ```
 
-Active Form will read property values from the model in setup. Given the following form class.
+Action Form will read property values from the model in setup. Given the following form class.
 
 ```ruby
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   attribute :name
 end
 ```
@@ -101,7 +101,7 @@ Your `@conference_form` is now ready to be rendered, either do it yourself or us
 <% end %>
 ```
 
-Nested forms and collections can be easily rendered with `fields_for`, etc. Just use Active Form as if it would be an Active Model instance in the view layer.
+Nested forms and collections can be easily rendered with `fields_for`, etc. Just use Action Form as if it would be an Active Model instance in the view layer.
 
 ## Syncing Back
 
@@ -143,7 +143,7 @@ If the `save` method returns false due to validation errors defined on the form,
 
 ## Nesting Forms: 1-n Relations
 
-Active Form also gives you nested collections.
+Action Form also gives you nested collections.
 
 Let's define the `has_many :speakers` collection association on the `Conference` model.
 
@@ -157,7 +157,7 @@ end
 The form should look like this.
 
 ```ruby
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   attributes :name, :city, required: true
 
   association :speakers do
@@ -172,7 +172,7 @@ This basically works like a nested `property` that iterates over a collection of
 
 ### has_many: Rendering
 
-Active Form will expose the collection using the `speakers` method.
+Action Form will expose the collection using the `speakers` method.
 
 ```erb
 <%= form_for @conference_form |f| %>
@@ -201,7 +201,7 @@ end
 The full form should look like this:
 
 ```ruby
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   attributes :name, :city, required: true
 
   association :speakers do
@@ -237,12 +237,12 @@ Use `fields_for` in a Rails environment to correctly setup the structure of para
 
 ## Dynamically Adding/Removing Nested Objects
 
-Active Form comes with two helpers to deal with this functionality:
+Action Form comes with two helpers to deal with this functionality:
 
 1. `link_to_add_association` will display a link that renders fields to create a new object.
 2. `link_to_remove_association` will display a link to remove a existing/dynamic object.
 
-In order to use it you have to insert this line: `//= require active_form` to your `app/assets/javascript/application.js` file.
+In order to use it you have to insert this line: `//= require action_form` to your `app/assets/javascript/application.js` file.
 
 In our `ConferenceForm` we can dynamically create/remove `Speaker` objects. To do that we would write in the `app/views/conferences/_form.html.erb` partial:
 
@@ -324,7 +324,7 @@ And `app/views/conferences/_presentation_fields.html.erb` would be:
 
 ## Plain Old Ruby Object Forms
 
-ActiveForm also can accept `ActiveModel::Model` instances as a model.
+ActionForm also can accept `ActiveModel::Model` instances as a model.
 
 ```ruby
 class Feedback
@@ -341,7 +341,7 @@ end
 The form should look like this.
 
 ```ruby
-class FeedbackForm < ActiveForm::Base
+class FeedbackForm < ActionForm::Base
   attributes :name, :body, :email, required: true
 end
 ```

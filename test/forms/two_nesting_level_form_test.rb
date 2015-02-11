@@ -13,7 +13,7 @@ class TwoNestingLevelFormTest < ActiveSupport::TestCase
 
   test "contains getter for producer sub-form" do
     assert_respond_to @form.artist, :producer
-    assert_instance_of ActiveForm::Form, @producer_form
+    assert_instance_of ActionForm::Form, @producer_form
   end
 
   test "producer sub-form contains association name and parent model" do

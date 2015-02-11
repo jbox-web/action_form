@@ -16,7 +16,7 @@ class ConferenceFormTest < ActiveSupport::TestCase
     assert_respond_to @form.speaker, :presentations
 
     presentations_form = @form.speaker.forms.first
-    assert_instance_of ActiveForm::FormCollection, presentations_form
+    assert_instance_of ActionForm::FormCollection, presentations_form
   end
 
   test "#represents? returns true if the argument matches the Form's association name, false otherwise" do
@@ -32,7 +32,7 @@ class ConferenceFormTest < ActiveSupport::TestCase
     presentations = @form.speaker.presentations
 
     presentations.each do |form|
-      assert_instance_of ActiveForm::Form, form
+      assert_instance_of ActionForm::Form, form
       assert_instance_of Presentation, form.model
     end
   end
@@ -52,7 +52,7 @@ class ConferenceFormTest < ActiveSupport::TestCase
     assert_equal 2, presentations_form.models.size
 
     presentations_form.each do |form|
-      assert_instance_of ActiveForm::Form, form
+      assert_instance_of ActionForm::Form, form
       assert_instance_of Presentation, form.model
 
       assert_respond_to form, :topic

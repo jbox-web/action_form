@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   class Form
     include ActiveModel::Validations
     include FormHelpers

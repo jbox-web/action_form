@@ -28,7 +28,7 @@ class NestedModelFormTest < ActiveSupport::TestCase
 
   test "contains getter for email sub-form" do
     assert_respond_to @form, :email
-    assert_instance_of ActiveForm::Form, @form.email
+    assert_instance_of ActionForm::Form, @form.email
   end
 
   test "email sub-form contains association name and parent model" do

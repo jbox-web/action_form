@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   module ViewHelpers
 
     def link_to_remove_association(name, f, html_options={})

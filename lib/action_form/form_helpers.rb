@@ -1,4 +1,4 @@
-module ActiveForm
+module ActionForm
   module FormHelpers
     ATTRIBUTES_KEY_REGEXP = /^(.+)_attributes$/
 

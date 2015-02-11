@@ -1,4 +1,4 @@
-class ConferenceForm < ActiveForm::Base
+class ConferenceForm < ActionForm::Base
   attributes :name, :city, required: true
   attributes :photo
 

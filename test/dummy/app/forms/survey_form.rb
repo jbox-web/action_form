@@ -1,4 +1,4 @@
-class SurveyForm < ActiveForm::Base
+class SurveyForm < ActionForm::Base
   attribute :name, required: true
 
   association :questions do
