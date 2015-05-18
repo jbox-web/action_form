@@ -330,7 +330,7 @@ ActionForm also can accept `ActiveModel::Model` instances as a model.
 class Feedback
   include ActiveModel::Model
 
-  attr_accessible :name, :body, :email
+  attr_accessor :name, :body, :email
 
   def save
     FeedbackMailer.send_email(email, name, body)
