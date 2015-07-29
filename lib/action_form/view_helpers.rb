@@ -1,7 +1,7 @@
 module ActionForm
   module ViewHelpers
 
-    def link_to_remove_association(name, f, html_options={})
+    def link_to_remove_association(name, f, html_options={}, &block)
       classes = []
       classes << "remove_fields"
 
@@ -13,9 +13,9 @@ module ActionForm
       html_options[:'data-wrapper-class'] = wrapper_class if wrapper_class.present?
 
       if is_existing
-        f.hidden_field(:_destroy) + link_to(name, '#', html_options)
+        f.hidden_field(:_destroy) + build_link(name, html_options, block)
       else
-        link_to(name, '#', html_options)
+        build_link(name, html_options, block)
       end
     end
 
@@ -35,7 +35,7 @@ module ActionForm
       end
     end
 
-    def link_to_add_association(name, f, association, html_options={})
+    def link_to_add_association(name, f, association, html_options={}, &block)
       render_options = html_options.delete(:render_options)
       render_options ||= {}
       override_partial = html_options.delete(:partial)
@@ -47,7 +47,7 @@ module ActionForm
 
       html_options[:'data-association-insertion-template'] = CGI.escapeHTML(render_association(association, f, new_object, render_options, override_partial).to_str).html_safe
 
-      link_to(name, '#', html_options)
+      build_link(name, html_options, block)
     end
 
     def create_object(f, association)
@@ -56,6 +56,16 @@ module ActionForm
 
     def get_partial_path(partial, association)
       partial ? partial : association.to_s.singularize + "_fields"
+    end
+
+    private
+
+    def build_link(name, html_options, block)
+      if block
+        link_to('#', html_options, &block)
+      else
+        link_to(name, '#', html_options)
+      end
     end
   end
 end
