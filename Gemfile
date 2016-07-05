@@ -10,3 +10,7 @@ group :development do
   gem 'rake'
   gem 'appraisal'
 end
+
+group :test do
+  gem 'codeclimate-test-reporter', require: nil
+end
