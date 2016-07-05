@@ -4,7 +4,7 @@ class CreateArtists < ActiveRecord::Migration
       t.string :name
       t.references :song, index: true
 
-      t.timestamps, null: false
+      t.timestamps null: false
     end
   end
 end

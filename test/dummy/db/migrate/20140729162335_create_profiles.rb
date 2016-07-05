@@ -5,7 +5,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :github_name
       t.references :user, index: true
 
-      t.timestamps, null: false
+      t.timestamps null: false
     end
   end
 end

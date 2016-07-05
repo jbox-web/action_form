@@ -4,7 +4,7 @@ class CreateProjectTags < ActiveRecord::Migration
       t.references :project, index: true
       t.references :tag, index: true
 
-      t.timestamps, null: false
+      t.timestamps null: false
     end
   end
 end
