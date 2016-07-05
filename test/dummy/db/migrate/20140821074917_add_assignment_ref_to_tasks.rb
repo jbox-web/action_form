@@ -1,4 +1,4 @@
-class AddAssignmentRefToTasks < ActiveRecord::Migration[4.2]
+class AddAssignmentRefToTasks < ActiveRecord::Migration
   def change
     add_reference :tasks, :assignment, index: true
   end

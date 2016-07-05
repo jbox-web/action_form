@@ -1,4 +1,4 @@
-class CreateQuestions < ActiveRecord::Migration[4.2]
+class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
       t.text :content

@@ -1,4 +1,4 @@
-class CreateArtists < ActiveRecord::Migration[4.2]
+class CreateArtists < ActiveRecord::Migration
   def change
     create_table :artists do |t|
       t.string :name

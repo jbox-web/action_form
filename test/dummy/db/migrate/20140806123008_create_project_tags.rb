@@ -1,4 +1,4 @@
-class CreateProjectTags < ActiveRecord::Migration[4.2]
+class CreateProjectTags < ActiveRecord::Migration
   def change
     create_table :project_tags do |t|
       t.references :project, index: true

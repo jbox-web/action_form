@@ -1,4 +1,4 @@
-class CreateConferences < ActiveRecord::Migration[4.2]
+class CreateConferences < ActiveRecord::Migration
   def change
     create_table :conferences do |t|
       t.string :name
