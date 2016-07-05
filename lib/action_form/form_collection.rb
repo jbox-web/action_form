@@ -172,9 +172,9 @@ module ActionForm
       forms << new_form
       new_form
     end
-  end
 
-  def rails_5?
-    Rails.version[0] == '5'
+    def rails_5?
+      Rails.version[0] == '5'
+    end
   end
 end
