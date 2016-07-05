@@ -1,3 +1,7 @@
+#!/usr/bin/env rake
+
+require 'rubygems'
+
 begin
   require 'bundler/setup'
 rescue LoadError
