@@ -1,4 +1,4 @@
-class CreateSpeakers < ActiveRecord::Migration
+class CreateSpeakers < ActiveRecord::Migration[4.2]
   def change
     create_table :speakers do |t|
       t.string :name

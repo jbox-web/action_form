@@ -1,4 +1,4 @@
-class CreatePresentations < ActiveRecord::Migration
+class CreatePresentations < ActiveRecord::Migration[4.2]
   def change
     create_table :presentations do |t|
       t.string :topic
