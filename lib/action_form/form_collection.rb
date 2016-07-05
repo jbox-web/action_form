@@ -20,6 +20,7 @@ module ActionForm
 
     def submit(params)
       params.each do |key, value|
+        value = value.to_h if value.is_a?(ActionController::Parameters) && rails_5?
         if parent.persisted?
           create_or_update_record(value)
         else
@@ -120,7 +121,7 @@ module ActionForm
     end
 
     def dynamic_key?(i)
-      i > forms.size
+      i >= forms.size
     end
 
     def aggregate_form_errors
@@ -173,4 +174,7 @@ module ActionForm
     end
   end
 
+  def rails_5?
+    Rails.version[0] == '5'
+  end
 end
