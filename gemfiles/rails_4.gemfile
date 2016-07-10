@@ -3,7 +3,6 @@
 source "https://rubygems.org"
 
 gem "jquery-rails"
-gem "simple_form"
 gem "rails", "~> 4.2.6"
 
 group :development do
@@ -13,6 +12,7 @@ group :development do
 end
 
 group :test do
+  gem "simple_form"
   gem "codeclimate-test-reporter", :require => nil
 end
 

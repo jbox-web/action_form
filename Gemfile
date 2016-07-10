@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'jquery-rails'
-gem 'simple_form'
 
 group :development do
   gem 'bundler'
@@ -12,5 +11,6 @@ group :development do
 end
 
 group :test do
+  gem 'simple_form'
   gem 'codeclimate-test-reporter', require: nil
 end
