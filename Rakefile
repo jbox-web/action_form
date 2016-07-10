@@ -10,6 +10,7 @@ end
 
 require 'rdoc/task'
 
+desc 'Generate documentation.'
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'ActionForm'
