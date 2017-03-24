@@ -1,5 +1,4 @@
 require 'simplecov'
-require 'codeclimate-test-reporter'
 
 # Configure SimpleCov
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
