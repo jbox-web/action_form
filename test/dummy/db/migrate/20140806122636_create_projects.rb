@@ -1,4 +1,5 @@
-class CreateProjects < ActiveRecord::Migration
+klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
+class CreateProjects < klass
   def change
     create_table :projects do |t|
       t.string :name

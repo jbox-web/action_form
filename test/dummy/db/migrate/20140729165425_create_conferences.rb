@@ -1,4 +1,5 @@
-class CreateConferences < ActiveRecord::Migration
+klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
+class CreateConferences < klass
   def change
     create_table :conferences do |t|
       t.string :name

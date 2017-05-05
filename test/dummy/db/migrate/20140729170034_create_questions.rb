@@ -1,4 +1,5 @@
-class CreateQuestions < ActiveRecord::Migration
+klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
+class CreateQuestions < klass
   def change
     create_table :questions do |t|
       t.text :content
