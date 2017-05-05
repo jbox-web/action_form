@@ -50,11 +50,12 @@ module ActionForm
 
     def collect_errors_from(validatable_object)
       validatable_object.errors.each do |attribute, error|
-        key = if validatable_object.respond_to?(:association_name)
-          "#{validatable_object.association_name}.#{attribute}"
-        else
-          attribute
-        end
+        key =
+          if validatable_object.respond_to?(:association_name)
+            "#{validatable_object.association_name}.#{attribute}"
+          else
+            attribute
+          end
 
         errors.add(key, error)
       end
