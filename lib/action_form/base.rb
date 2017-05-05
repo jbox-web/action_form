@@ -15,7 +15,7 @@ module ActionForm
       @forms = []
       populate_forms
     end
-    
+
     def get_model(assoc_name)
       form = find_form_by_assoc_name(assoc_name)
       form.get_model(assoc_name)
@@ -29,7 +29,7 @@ module ActionForm
       if valid?
         run_callbacks :save do
           ActiveRecord::Base.transaction do
-              model.save
+            model.save
           end
         end
       else
