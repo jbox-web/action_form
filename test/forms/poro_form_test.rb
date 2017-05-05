@@ -38,4 +38,12 @@ class PoroFormTest < ActiveSupport::TestCase
 
     assert @form.save
   end
+
+  test "raise error" do
+    @form.submit({ name: nil, city: nil })
+
+    assert_raise ActiveRecord::RecordInvalid do
+      @form.save!
+    end
+  end
 end
