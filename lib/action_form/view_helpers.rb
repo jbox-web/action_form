@@ -22,13 +22,14 @@ module ActionForm
     def render_association(association, f, new_object, render_options={}, custom_partial=nil)
       partial = get_partial_path(custom_partial, association)
 
-      if f.respond_to?(:semantic_fields_for)
-        method_name = :semantic_fields_for
-      elsif f.respond_to?(:simple_fields_for)
-        method_name = :simple_fields_for
-      else
-        method_name = :fields_for
-      end
+      method_name =
+        if f.respond_to?(:semantic_fields_for)
+          :semantic_fields_for
+        elsif f.respond_to?(:simple_fields_for)
+          :simple_fields_for
+        else
+          :fields_for
+        end
 
       f.send(method_name, association, new_object, {:child_index => "new_#{association}"}.merge(render_options)) do |builder|
         render(partial: partial, locals: {:f => builder})
