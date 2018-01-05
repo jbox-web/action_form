@@ -7,7 +7,7 @@ module ActionForm
 
       is_existing = f.object.persisted?
       classes << (is_existing ? 'existing' : 'dynamic')
-      
+
       wrapper_class = html_options.delete(:wrapper_class)
       html_options[:class] = [html_options[:class], classes.join(' ')].compact.join(' ')
       html_options[:'data-wrapper-class'] = wrapper_class if wrapper_class.present?
@@ -21,7 +21,7 @@ module ActionForm
 
     def render_association(association, f, new_object, render_options={}, custom_partial=nil)
       partial = get_partial_path(custom_partial, association)
-      
+
       if f.respond_to?(:semantic_fields_for)
         method_name = :semantic_fields_for
       elsif f.respond_to?(:simple_fields_for)
@@ -29,7 +29,7 @@ module ActionForm
       else
         method_name = :fields_for
       end
-      
+
       f.send(method_name, association, new_object, {:child_index => "new_#{association}"}.merge(render_options)) do |builder|
         render(partial: partial, locals: {:f => builder})
       end
@@ -46,10 +46,10 @@ module ActionForm
       new_object = create_object(f, association)
 
       html_options[:'data-association-insertion-template'] = CGI.escapeHTML(render_association(association, f, new_object, render_options, override_partial).to_str).html_safe
-        
+
       link_to(name, '#', html_options)
     end
-    
+
     def create_object(f, association)
       f.object.get_model(association)
     end
