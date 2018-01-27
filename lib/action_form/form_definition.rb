@@ -4,10 +4,10 @@ module ActionForm
   class FormDefinition
     attr_accessor :assoc_name, :proc, :parent, :records
 
-    def initialize(assoc_name, block, options={})
+    def initialize(assoc_name, block, options = {})
       @assoc_name = assoc_name
-      @proc = block
-      @records = options[:records]
+      @proc       = block
+      @records    = options[:records]
     end
 
     def to_form
@@ -17,7 +17,7 @@ module ActionForm
       when :has_one, :belongs_to
         Form.new(assoc_name, parent, proc)
       when :has_many
-        FormCollection.new(assoc_name, parent, proc, {records: records})
+        FormCollection.new(assoc_name, parent, proc, { records: records })
       end
     end
 

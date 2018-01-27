@@ -31,7 +31,7 @@ module ActionForm
       end
     end
 
-    def get_model(assoc_name)
+    def get_model(_assoc_name)
       Form.new(association_name, parent, proc)
     end
 
@@ -49,9 +49,9 @@ module ActionForm
       forms
     end
 
-    def each(&block)
+    def each
       forms.each do |form|
-        block.call(form)
+        yield form
       end
     end
 
@@ -59,7 +59,7 @@ module ActionForm
 
     REJECT_ALL_BLANK_PROC = proc { |attributes| attributes.all? { |key, value| key == '_destroy' || value.blank? } }
 
-    UNASSIGNABLE_KEYS = %w( id _destroy )
+    UNASSIGNABLE_KEYS = %w[id _destroy].freeze
 
     def call_reject_if(attributes)
       REJECT_ALL_BLANK_PROC.call(attributes)
@@ -68,7 +68,7 @@ module ActionForm
     def assign_to_or_mark_for_destruction(form, attributes)
       form.submit(attributes.except(*UNASSIGNABLE_KEYS))
 
-      if has_destroy_flag?(attributes)
+      if destroy_flag?(attributes)
         form.delete
         remove_form(form)
       end
@@ -103,15 +103,13 @@ module ActionForm
       if dynamic_key?(i)
         create_record(attributes)
       else
-        if call_reject_if(attributes)
-          forms[i].delete
-        end
+        forms[i].delete if call_reject_if(attributes)
         forms[i].submit(attributes)
       end
     end
 
-    def has_destroy_flag?(attributes)
-      attributes['_destroy'] == "1"
+    def destroy_flag?(attributes)
+      attributes['_destroy'] == '1'
     end
 
     def assign_forms

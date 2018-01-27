@@ -3,9 +3,9 @@
 module ActionForm
   module ViewHelpers
 
-    def link_to_remove_association(name, f, html_options={}, &block)
+    def link_to_remove_association(name, f, html_options = {}, &block)
       classes = []
-      classes << "remove_fields"
+      classes << 'remove_fields'
 
       is_existing = f.object.persisted?
       classes << (is_existing ? 'existing' : 'dynamic')
@@ -21,7 +21,7 @@ module ActionForm
       end
     end
 
-    def render_association(association, f, new_object, render_options={}, custom_partial=nil)
+    def render_association(association, f, new_object, render_options = {}, custom_partial = nil)
       partial = get_partial_path(custom_partial, association)
 
       method_name =
@@ -33,17 +33,17 @@ module ActionForm
           :fields_for
         end
 
-      f.send(method_name, association, new_object, {:child_index => "new_#{association}"}.merge(render_options)) do |builder|
-        render(partial: partial, locals: {:f => builder})
+      f.send(method_name, association, new_object, { child_index: "new_#{association}" }.merge(render_options)) do |builder|
+        render(partial: partial, locals: { f: builder })
       end
     end
 
-    def link_to_add_association(name, f, association, html_options={}, &block)
+    def link_to_add_association(name, f, association, html_options = {}, &block)
       render_options = html_options.delete(:render_options)
       render_options ||= {}
       override_partial = html_options.delete(:partial)
 
-      html_options[:class] = [html_options[:class], "add_fields"].compact.join(' ')
+      html_options[:class] = [html_options[:class], 'add_fields'].compact.join(' ')
       html_options[:'data-association'] = association.to_s
 
       new_object = create_object(f, association)
@@ -58,7 +58,7 @@ module ActionForm
     end
 
     def get_partial_path(partial, association)
-      partial ? partial : association.to_s.singularize + "_fields"
+      partial ? partial : association.to_s.singularize + '_fields'
     end
 
     private

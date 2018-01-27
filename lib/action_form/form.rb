@@ -8,7 +8,7 @@ module ActionForm
     delegate :id, :_destroy, :persisted?, to: :model
     attr_reader :association_name, :parent, :model, :forms, :proc
 
-    def initialize(assoc_name, parent, proc, model=nil)
+    def initialize(assoc_name, parent, proc, model = nil)
       @association_name = assoc_name
       @parent = parent
       @model = assign_model(model)
@@ -22,23 +22,29 @@ module ActionForm
       model.class
     end
 
-    def association(name, options={}, &block)
+    def association(name, options = {}, &block)
       macro = model.class.reflect_on_association(name).macro
       form_definition = FormDefinition.new(name, block, options)
       form_definition.parent = @model
 
       case macro
       when :has_one, :belongs_to
-        class_eval "def #{name}; @#{name}; end"
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{name}; @#{name}; end
+        RUBY
       when :has_many
-        class_eval "def #{name}; @#{name}.models; end"
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{name}; @#{name}.models; end
+        RUBY
       end
 
       nested_form = form_definition.to_form
       @forms << nested_form
       instance_variable_set("@#{name}", nested_form)
 
-      class_eval "def #{name}_attributes=; end"
+      class_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def #{name}_attributes=; end
+      RUBY
     end
 
     def attributes(*arguments)
@@ -66,7 +72,7 @@ module ActionForm
     end
 
     def update_models
-      @model = parent.send("#{association_name}")
+      @model = parent.send(association_name)
     end
 
     REJECT_ALL_BLANK_PROC = proc { |attributes| attributes.all? { |key, value| key == '_destroy' || value.blank? } }
@@ -122,8 +128,8 @@ module ActionForm
 
       case macro
       when :belongs_to
-        if parent.send("#{association_name}")
-          parent.send("#{association_name}")
+        if parent.send(association_name)
+          parent.send(association_name)
         else
           association_reflection.klass.new
         end
@@ -135,8 +141,8 @@ module ActionForm
     end
 
     def fetch_or_initialize_model
-      if parent.send("#{association_name}")
-        parent.send("#{association_name}")
+      if parent.send(association_name)
+        parent.send(association_name)
       else
         parent.send("build_#{association_name}")
       end

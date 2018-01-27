@@ -65,18 +65,24 @@ module ActionForm
 
       alias_method :attribute, :attributes
 
-      def association(name, options={}, &block)
+      def association(name, options = {}, &block)
         forms << FormDefinition.new(name, block, options)
         macro = main_class.reflect_on_association(name).macro
 
         case macro
         when :has_one, :belongs_to
-          class_eval "def #{name}; @#{name}; end"
+          class_eval <<-RUBY, __FILE__, __LINE__ + 1
+            def #{name}; @#{name}; end
+          RUBY
         when :has_many
-          class_eval "def #{name}; @#{name}.models; end"
+          class_eval <<-RUBY, __FILE__, __LINE__ + 1
+            def #{name}; @#{name}.models; end
+          RUBY
         end
 
-        class_eval "def #{name}_attributes=; end"
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{name}_attributes=; end
+        RUBY
       end
 
       def forms
@@ -87,9 +93,7 @@ module ActionForm
     private
 
     def update_form_models
-      forms.each do |form|
-        form.update_models
-      end
+      forms.map(&:update_models)
     end
 
     def populate_forms
