@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActionForm
   class FormCollection
     include ActiveModel::Validations

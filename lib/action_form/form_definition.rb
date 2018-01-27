@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActionForm
   class FormDefinition
     attr_accessor :assoc_name, :proc, :parent, :records

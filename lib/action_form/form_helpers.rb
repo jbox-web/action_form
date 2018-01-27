@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActionForm
   module FormHelpers
     ATTRIBUTES_KEY_REGEXP = /^(.+)_attributes$/
