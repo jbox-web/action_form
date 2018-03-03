@@ -10,7 +10,7 @@ module ActionForm
   autoload :FormHelpers,    'action_form/form_helpers'
 
   class Engine < ::Rails::Engine
-    initializer 'action_form.initialize' do |app|
+    initializer 'action_form.initialize' do
       ActiveSupport.on_load :action_view do
         include ActionForm::ViewHelpers
       end

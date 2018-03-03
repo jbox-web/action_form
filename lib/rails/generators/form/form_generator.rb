@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails/generators'
 require 'rails/generators/named_base'
 
@@ -10,7 +12,7 @@ module Rails
 
       hook_for :test_framework
 
-      argument :attributes, type: :array, default: [], banner: "field1 field2 field3"
+      argument :attributes, type: :array, default: [], banner: 'field1 field2 field3'
 
       def self.default_generator_root
         File.dirname(__FILE__)

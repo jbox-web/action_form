@@ -160,7 +160,7 @@ module ActionForm
     end
 
     def find_form_by_model_id(id)
-     forms.select { |form| form.id == id.to_i }.first
+      forms.select { |form| form.id == id.to_i }.first
     end
 
     def remove_form(form)
