@@ -291,7 +291,6 @@ class ProjectFormTest < ActiveSupport::TestCase
   end
 
   test "create new project with existing tag" do
-    ## FAILS
     ProjectTag.delete_all
     Tag.delete_all
 
@@ -351,7 +350,6 @@ class ProjectFormTest < ActiveSupport::TestCase
   end
 
   test "update existing project with existing tag" do
-    ## FAILS
     tag = Tag.create(name: "Html Forms")
     project = Project.create(name: "Form Models", description: "Google Summer of Code 2014")
     project_form = ProjectForm.new(project)
@@ -423,7 +421,6 @@ class ProjectFormTest < ActiveSupport::TestCase
   end
 
   test "create new project with existing owner" do
-    ## FAILS
     owner = Person.create(name: "Carlos Silva", role: "RoR Core Member", description: "Mentoring Peter throughout GSoC")
     project = Project.new
     project_form = ProjectForm.new(project)
@@ -491,7 +488,6 @@ class ProjectFormTest < ActiveSupport::TestCase
   end
 
   test "update project with existing owner" do
-    ## FAILS
     owner = Person.create(name: "Carlos Silva", role: "RoR Core Member", description: "Mentoring Peter throughout GSoC")
     project = Project.create(name: "Form Models", description: "GSoC 2014")
     project_form = ProjectForm.new(project)
