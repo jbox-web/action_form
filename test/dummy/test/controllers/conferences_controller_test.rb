@@ -36,7 +36,7 @@ class ConferencesControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     conference_form = assigns(:conference_form)
@@ -82,7 +82,7 @@ class ConferencesControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     conference_form = assigns(:conference_form)
@@ -133,7 +133,7 @@ class ConferencesControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     conference_form = assigns(:conference_form)
@@ -150,12 +150,12 @@ class ConferencesControllerTest < ActionController::TestCase
   end
 
   test "should show conference" do
-    get :show, wrapped_params(id: @conference)
+    get :show, params: { id: @conference }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, wrapped_params(id: @conference)
+    get :edit, params: { id: @conference }
     assert_response :success
   end
 
@@ -177,7 +177,7 @@ class ConferencesControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     conference_form = assigns(:conference_form)
@@ -216,7 +216,7 @@ class ConferencesControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     conference_form = assigns(:conference_form)
@@ -239,7 +239,7 @@ class ConferencesControllerTest < ActionController::TestCase
 
   test "should destroy conference" do
     assert_difference('Conference.count', -1) do
-      delete :destroy, wrapped_params(id: @conference)
+      delete :destroy, params: { id: @conference }
     end
 
     assert_redirected_to conferences_path

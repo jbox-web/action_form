@@ -22,7 +22,7 @@ module ActionForm
 
     def submit(params)
       params.each do |key, value|
-        value = value.to_h if value.is_a?(ActionController::Parameters) && rails_5?
+        value = value.to_h if value.is_a?(ActionController::Parameters)
         if parent.persisted?
           create_or_update_record(value)
         else
@@ -171,10 +171,6 @@ module ActionForm
       new_form = Form.new(association_name, parent, proc)
       forms << new_form
       new_form
-    end
-
-    def rails_5?
-      Rails.version[0] == '5'
     end
   end
 end

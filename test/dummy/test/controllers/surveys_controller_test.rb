@@ -36,7 +36,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -89,7 +89,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -141,7 +141,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -188,7 +188,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -203,12 +203,12 @@ class SurveysControllerTest < ActionController::TestCase
   end
 
   test "should show survey" do
-    get :show, wrapped_params(id: @survey)
+    get :show, params: { id: @survey }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, wrapped_params(id: @survey)
+    get :edit, params: { id: @survey }
     assert_response :success
   end
 
@@ -231,7 +231,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -287,7 +287,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -348,7 +348,7 @@ class SurveysControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     survey_form = assigns(:survey_form)
@@ -378,7 +378,7 @@ class SurveysControllerTest < ActionController::TestCase
 
   test "should destroy survey" do
     assert_difference('Survey.count', -1) do
-      delete :destroy, wrapped_params(id: @survey)
+      delete :destroy, params: { id: @survey }
     end
 
     assert_redirected_to surveys_path

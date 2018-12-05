@@ -35,7 +35,7 @@ class SongsControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     song_form = assigns(:song_form)
@@ -74,7 +74,7 @@ class SongsControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     song_form = assigns(:song_form)
@@ -95,12 +95,12 @@ class SongsControllerTest < ActionController::TestCase
   end
 
   test "should show song" do
-    get :show, wrapped_params(id: @song)
+    get :show, params: { id: @song }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, wrapped_params(id: @song)
+    get :edit, params: { id: @song }
     assert_response :success
   end
 
@@ -121,7 +121,7 @@ class SongsControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     song_form = assigns(:song_form)
@@ -141,7 +141,7 @@ class SongsControllerTest < ActionController::TestCase
 
   test "should destroy song" do
     assert_difference('Song.count', -1) do
-      delete :destroy, wrapped_params(id: @song)
+      delete :destroy, params: { id: @song }
     end
 
     assert_redirected_to songs_path

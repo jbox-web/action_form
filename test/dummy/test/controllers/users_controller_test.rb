@@ -36,7 +36,7 @@ class UsersControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     user_form = assigns(:user_form)
@@ -76,7 +76,7 @@ class UsersControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     user_form = assigns(:user_form)
@@ -93,12 +93,12 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should show user" do
-    get :show, wrapped_params(id: @user)
+    get :show, params: { id: @user }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, wrapped_params(id: @user)
+    get :edit, params: { id: @user }
     assert_response :success
   end
 
@@ -120,7 +120,7 @@ class UsersControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     user_form = assigns(:user_form)
@@ -139,7 +139,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete :destroy, wrapped_params(id: @user)
+      delete :destroy, params: { id: @user }
     end
 
     assert_redirected_to users_path

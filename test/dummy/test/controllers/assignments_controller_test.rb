@@ -31,7 +31,7 @@ class AssignmentsControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     assignment_form = assigns(:assignment_form)
@@ -67,7 +67,7 @@ class AssignmentsControllerTest < ActionController::TestCase
           }
         }
       }
-      post :create, wrapped_params(params)
+      post :create, params: params
     end
 
     assignment_form = assigns(:assignment_form)
@@ -81,12 +81,12 @@ class AssignmentsControllerTest < ActionController::TestCase
   end
 
   test "should show assignment" do
-    get :show, wrapped_params(id: @assignment)
+    get :show, params: { id: @assignment }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, wrapped_params(id: @assignment)
+    get :edit, params: { id: @assignment }
     assert_response :success
   end
 
@@ -103,7 +103,7 @@ class AssignmentsControllerTest < ActionController::TestCase
           }
         }
       }
-      patch :update, wrapped_params(params)
+      patch :update, params: params
     end
 
     assignment_form = assigns(:assignment_form)
@@ -121,7 +121,7 @@ class AssignmentsControllerTest < ActionController::TestCase
 
   test "should destroy assignment" do
     assert_difference('Assignment.count', -1) do
-      delete :destroy, wrapped_params(id: @assignment)
+      delete :destroy, params: { id: @assignment }
     end
 
     assert_redirected_to assignments_path
