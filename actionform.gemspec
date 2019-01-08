@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('lib', __dir__)
-$LOAD_PATH.push(lib) unless $LOAD_PATH.include?(lib)
-require 'action_form/version'
+require_relative 'lib/action_form/version'
 
 Gem::Specification.new do |s|
   s.name        = 'actionform'
@@ -15,15 +13,12 @@ Gem::Specification.new do |s|
   s.description = 'An alternative layer to accepts_nested_attributes_for by using Form Models.'
   s.license     = 'MIT'
 
-  s.add_dependency 'rails', '>= 5.0'
+  s.files = `git ls-files`.split("\n")
+
+  s.add_runtime_dependency 'rails', '>= 5.0'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
-
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ['lib']
 end
