@@ -25,3 +25,6 @@ before_script:
   - ./cc-test-reporter before-build
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+env:
+  global:
+    - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
