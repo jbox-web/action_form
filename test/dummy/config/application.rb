@@ -3,7 +3,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "action_form"
+require 'jquery-rails'
+require 'action_form'
 
 module Dummy
   class Application < Rails::Application
@@ -21,4 +22,3 @@ module Dummy
     config.autoload_paths += %W(#{Rails.root}/lib)
   end
 end
-

@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rails', '>= 5.0'
 
   s.add_development_dependency 'appraisal'
+  s.add_development_dependency 'jquery-rails'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'simplecov'
