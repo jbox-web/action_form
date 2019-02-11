@@ -9,6 +9,5 @@ RAILS_VERSIONS = %w[
 RAILS_VERSIONS.each do |version|
   appraise "rails_#{version}" do
     gem 'rails', version
-    gem 'rails-controller-testing'
   end
 end

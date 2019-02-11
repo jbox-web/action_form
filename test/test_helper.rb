@@ -11,6 +11,8 @@ require File.expand_path('dummy/config/environment.rb', __dir__)
 
 # Load test gems
 require 'rails/test_help'
+require 'rails-controller-testing'
+Rails::Controller::Testing.install
 
 Rails.backtrace_cleaner.remove_silencers!
 
