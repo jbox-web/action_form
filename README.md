@@ -1,10 +1,10 @@
 ## Action Form
 
-[![GitHub license](https://img.shields.io/github/license/jbox-web/actionform.svg)](https://github.com/jbox-web/actionform/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/jbox-web/actionform.svg)](https://github.com/jbox-web/actionform/releases/latest)
-[![Build Status](https://travis-ci.org/jbox-web/actionform.svg?branch=master)](https://travis-ci.org/jbox-web/actionform)
-[![Code Climate](https://codeclimate.com/github/jbox-web/actionform/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/actionform)
-[![Test Coverage](https://codeclimate.com/github/jbox-web/actionform/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/actionform/coverage)
+[![GitHub license](https://img.shields.io/github/license/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/releases/latest)
+[![Build Status](https://travis-ci.org/jbox-web/action_form.svg?branch=master)](https://travis-ci.org/jbox-web/action_form)
+[![Code Climate](https://codeclimate.com/github/jbox-web/action_form/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/action_form)
+[![Test Coverage](https://codeclimate.com/github/jbox-web/action_form/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/action_form/coverage)
 
 Set your models free from the `accepts_nested_attributes_for` helper. Action Form provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
 
@@ -13,7 +13,7 @@ Set your models free from the `accepts_nested_attributes_for` helper. Action For
 Add this line to your `Gemfile`:
 
 ```ruby
-gem 'actionform'
+gem 'action_form'
 ```
 
 ## Defining Forms
