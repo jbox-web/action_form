@@ -10,11 +10,15 @@ Set your models free from the `accepts_nested_attributes_for` helper. ActionForm
 
 ## Installation
 
-Add this line to your `Gemfile`:
+Put this in your `Gemfile` :
 
 ```ruby
-gem 'action_form'
+git_source(:github){ |repo_name| "https://github.com/#{repo_name}.git" }
+
+gem 'action_form', github: 'jbox-web/action_form', tag: '1.2.0'
 ```
+
+then run `bundle install`.
 
 ## Defining Forms
 
