@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "jquery-rails"
 gem "rails", "5.2.2"
 
 gemspec path: "../"
