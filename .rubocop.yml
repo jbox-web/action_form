@@ -1,0 +1,24 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - bin/*
+    - gemfiles/*
+    - test/**/*
+
+Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 110
+
+Metrics/MethodLength:
+  Max: 15
+
+Naming/PredicateName:
+  Enabled: false
