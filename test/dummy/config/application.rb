@@ -10,7 +10,6 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 # Load tested lib
-require 'action_form'
 require 'jquery-rails'
 
 module Dummy
