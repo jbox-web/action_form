@@ -1,4 +1,4 @@
-## Action Form
+## ActionForm
 
 [![GitHub license](https://img.shields.io/github/license/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/releases/latest)
