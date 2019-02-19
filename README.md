@@ -6,7 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/jbox-web/action_form/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/action_form)
 [![Test Coverage](https://codeclimate.com/github/jbox-web/action_form/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/action_form/coverage)
 
-Set your models free from the `accepts_nested_attributes_for` helper. Action Form provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
+Set your models free from the `accepts_nested_attributes_for` helper. ActionForm provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
 
 ## Installation
 
@@ -84,7 +84,7 @@ class ConferencesController
 end
 ```
 
-Action Form will read property values from the model in setup. Given the following form class.
+ActionForm will read property values from the model in setup. Given the following form class.
 
 ```ruby
 class ConferenceForm < ActionForm::Base
@@ -105,7 +105,7 @@ Your `@conference_form` is now ready to be rendered, either do it yourself or us
 <% end %>
 ```
 
-Nested forms and collections can be easily rendered with `fields_for`, etc. Just use Action Form as if it would be an Active Model instance in the view layer.
+Nested forms and collections can be easily rendered with `fields_for`, etc. Just use ActionForm as if it would be an Active Model instance in the view layer.
 
 ## Syncing Back
 
@@ -147,7 +147,7 @@ If the `save` method returns false due to validation errors defined on the form,
 
 ## Nesting Forms: 1-n Relations
 
-Action Form also gives you nested collections.
+ActionForm also gives you nested collections.
 
 Let's define the `has_many :speakers` collection association on the `Conference` model.
 
@@ -176,7 +176,7 @@ This basically works like a nested `property` that iterates over a collection of
 
 ### has_many: Rendering
 
-Action Form will expose the collection using the `speakers` method.
+ActionForm will expose the collection using the `speakers` method.
 
 ```erb
 <%= form_for @conference_form |f| %>
@@ -241,7 +241,7 @@ Use `fields_for` in a Rails environment to correctly setup the structure of para
 
 ## Dynamically Adding/Removing Nested Objects
 
-Action Form comes with two helpers to deal with this functionality:
+ActionForm comes with two helpers to deal with this functionality:
 
 1. `link_to_add_association` will display a link that renders fields to create a new object.
 2. `link_to_remove_association` will display a link to remove a existing/dynamic object.
