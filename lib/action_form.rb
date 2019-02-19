@@ -1,19 +1,8 @@
 # frozen_string_literal: true
 
-module ActionForm
-  autoload :Base,           'action_form/base'
-  autoload :Form,           'action_form/form'
-  autoload :FormCollection, 'action_form/form_collection'
-  autoload :FormDefinition, 'action_form/form_definition'
-  autoload :TooManyRecords, 'action_form/too_many_records'
-  autoload :ViewHelpers,    'action_form/view_helpers'
-  autoload :FormHelpers,    'action_form/form_helpers'
+require 'zeitwerk'
+Zeitwerk::Loader.for_gem.setup
 
-  class Engine < ::Rails::Engine
-    initializer 'action_form.initialize' do
-      ActiveSupport.on_load :action_view do
-        include ActionForm::ViewHelpers
-      end
-    end
-  end
+module ActionForm
+  require 'action_form/engine' if defined?(Rails)
 end
