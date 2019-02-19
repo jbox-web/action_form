@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = 'action_form'
   s.version     = ActionForm::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Petros Markou']
-  s.email       = ['markoupetr@gmail.com']
+  s.authors     = ['Petros Markou', 'Nicolas Rodriguez']
+  s.email       = ['markoupetr@gmail.com', 'nicoladmin@free.fr']
   s.homepage    = 'https://github.com/jbox-web/action_form'
   s.summary     = 'Create nested forms with ease.'
   s.description = 'An alternative layer to accepts_nested_attributes_for by using Form Models.'
