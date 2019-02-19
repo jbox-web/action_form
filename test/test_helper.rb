@@ -9,6 +9,9 @@ end
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('dummy/config/environment.rb', __dir__)
 
+# Set DB schema
+ActiveRecord::Migration.maintain_test_schema!
+
 # Load test gems
 require 'rails/test_help'
 require 'rails-controller-testing'
