@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.description = 'An alternative layer to accepts_nested_attributes_for by using Form Models.'
   s.license     = 'MIT'
 
+  s.required_ruby_version = '>= 2.4.0'
+
   s.files = `git ls-files`.split("\n")
 
   s.add_runtime_dependency 'rails', '>= 5.0'
