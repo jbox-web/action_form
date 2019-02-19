@@ -1,18 +1,15 @@
 # Ignore bundler config.
-/.bundle
+.bundle/
 
 # Ignore Gemfile.lock
-/Gemfile.lock
-/gemfiles/*.gemfile.lock
+Gemfile.lock
+gemfiles/*.lock
 
 # Ignore test files
-/coverage
+coverage/
 
 # Ignore dummy app files
-/test/dummy/db/*.sqlite3
-/test/dummy/db/*.sqlite3-journal
-/test/dummy/log/*.log
-/test/dummy/tmp/
-
-# Temp files
-/tmp
+test/dummy/db/*.sqlite3
+test/dummy/db/*.sqlite3-journal
+test/dummy/log/*.log
+test/dummy/tmp/
