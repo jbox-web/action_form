@@ -9,8 +9,9 @@ require 'rails/all'
 # Require the gems listed in Gemfile
 Bundler.require(*Rails.groups)
 
-require 'jquery-rails'
+# Load tested lib
 require 'action_form'
+require 'jquery-rails'
 
 module Dummy
   class Application < Rails::Application
