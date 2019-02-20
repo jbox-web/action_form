@@ -4,7 +4,7 @@ require_relative 'lib/action_form/version'
 
 Gem::Specification.new do |s|
   s.name        = 'action_form'
-  s.version     = ActionForm::VERSION
+  s.version     = ActionForm::VERSION::STRING
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Petros Markou', 'Nicolas Rodriguez']
   s.email       = ['markoupetr@gmail.com', 'nicoladmin@free.fr']
