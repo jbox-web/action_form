@@ -20,3 +20,7 @@ before_script:
   - ./cc-test-reporter before-build
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+matrix:
+  exclude:
+    - gemfile: gemfiles/rails_6.0.0.beta2.gemfile
+      rvm: 2.4.5
