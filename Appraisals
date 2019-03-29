@@ -2,9 +2,9 @@
 
 RAILS_VERSIONS = %w[
   5.0.7
-  5.1.6
-  5.2.2
-  6.0.0.beta2
+  5.1.7
+  5.2.3
+  6.0.0.beta3
 ].freeze
 
 RAILS_VERSIONS.each do |version|
