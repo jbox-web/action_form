@@ -2,9 +2,9 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
-  - 2.6.2
+  - 2.6.3
   - 2.5.5
-  - 2.4.5
+  - 2.4.6
   - ruby-head
 before_install:
   - gem update --system
@@ -23,4 +23,4 @@ after_script:
 matrix:
   exclude:
     - gemfile: gemfiles/rails_6.0.0.beta3.gemfile
-      rvm: 2.4.5
+      rvm: 2.4.6
