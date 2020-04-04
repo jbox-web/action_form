@@ -11,7 +11,7 @@ gemfile:
   - gemfiles/rails_5.0.7.gemfile
   - gemfiles/rails_5.1.7.gemfile
   - gemfiles/rails_5.2.4.gemfile
-  - gemfiles/rails_6.0.1.gemfile
+  - gemfiles/rails_6.0.2.gemfile
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -20,7 +20,7 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 matrix:
   exclude:
-    - gemfile: gemfiles/rails_6.0.1.gemfile
+    - gemfile: gemfiles/rails_6.0.2.gemfile
       rvm: 2.4.10
   allow_failures:
     - rvm: ruby-head
