@@ -5,7 +5,7 @@ AllCops:
     - gemfiles/*
     - test/**/*
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Layout/EmptyLinesAroundModuleBody:
@@ -14,7 +14,7 @@ Layout/EmptyLinesAroundModuleBody:
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 110
 
 Metrics/MethodLength:
@@ -22,3 +22,18 @@ Metrics/MethodLength:
 
 Naming/PredicateName:
   Enabled: false
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
