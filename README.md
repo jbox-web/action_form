@@ -15,7 +15,7 @@ Put this in your `Gemfile` :
 ```ruby
 git_source(:github){ |repo_name| "https://github.com/#{repo_name}.git" }
 
-gem 'action_form', github: 'jbox-web/action_form', tag: '1.2.0'
+gem 'action_form', github: 'jbox-web/action_form', tag: '1.3.0'
 ```
 
 then run `bundle install`.
