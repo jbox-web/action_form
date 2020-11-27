@@ -148,8 +148,14 @@ module ActionForm
     end
 
     def collect_errors_from(model)
-      model.errors.each do |attribute, error|
-        errors.add(attribute, error)
+      if Rails.gem_version >= ::Gem::Version.new('6.1.0.alpha')
+        model.errors.each do |error|
+          errors.add(error.attribute, error.message)
+        end
+      else
+        model.errors.each do |attribute, error|
+          errors.add(attribute, error)
+        end
       end
     end
 

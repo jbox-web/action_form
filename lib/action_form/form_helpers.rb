@@ -51,6 +51,14 @@ module ActionForm
     end
 
     def collect_errors_from(validatable_object)
+      if Rails.gem_version >= ::Gem::Version.new('6.1.0.alpha')
+        rails6_collect_errors_from(validatable_object)
+      else
+        rails_collect_errors_from(validatable_object)
+      end
+    end
+
+    def rails_collect_errors_from(validatable_object)
       validatable_object.errors.each do |attribute, error|
         key =
           if validatable_object.respond_to?(:association_name)
@@ -62,5 +70,19 @@ module ActionForm
         errors.add(key, error)
       end
     end
+
+    def rails6_collect_errors_from(validatable_object)
+      validatable_object.errors.each do |error|
+        key =
+          if validatable_object.respond_to?(:association_name)
+            "#{validatable_object.association_name}.#{error.attribute}"
+          else
+            error.attribute
+          end
+
+        errors.add(key, error.message)
+      end
+    end
+
   end
 end
