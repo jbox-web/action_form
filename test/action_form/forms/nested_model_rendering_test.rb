@@ -44,7 +44,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<option value="1">Female<\/option>/, output_buffer)
     assert_match(/<\/select>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Create User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create User" data-disable-with="Create User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a existing instance of UserFormFixture" do
@@ -81,7 +81,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<option value="1">Female<\/option>/, output_buffer)
     assert_match(/<\/select>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Update User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update User" data-disable-with="Update User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a new instance of UserWithEmailFormFixture" do
@@ -124,7 +124,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<label for="user_email_attributes_address">Address<\/label>/, output_buffer)
     assert_match(/<input type="text" name="user\[email_attributes\]\[address\]" id="user_email_attributes_address" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Create User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create User" data-disable-with="Create User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a existing instance of UserWithEmailFormFixture" do
@@ -170,7 +170,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<input type="text" value="#{user_form.email.address}" name="user\[email_attributes\]\[address\]" id="user_email_attributes_address" \/>/, output_buffer)
     assert_match(/<input type="hidden" value="#{user_form.email.id}" name="user\[email_attributes\]\[id\]" id="user_email_attributes_id" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Update User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update User" data-disable-with="Update User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a new instance of UserWithEmailAndProfileFormFixture" do
@@ -226,7 +226,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<label for="user_profile_attributes_github_name">Github name<\/label>/, output_buffer)
     assert_match(/<input type="text" name="user\[profile_attributes\]\[github_name\]" id="user_profile_attributes_github_name" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Create User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create User" data-disable-with="Create User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly an existing instance of UserWithEmailAndProfileFormFixture" do
@@ -286,7 +286,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<input type="text" value="#{user_form.profile.github_name}" name="user\[profile_attributes\]\[github_name\]" id="user_profile_attributes_github_name" \/>/, output_buffer)
     assert_match(/<input type="hidden" value="#{user_form.profile.id}" name="user\[profile_attributes\]\[id\]" id="user_profile_attributes_id" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Update User" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update User" data-disable-with="Update User" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a new instance of SongsFormFixture" do
@@ -336,7 +336,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<label for="song_artist_attributes_producer_attributes_studio">Studio<\/label>/, output_buffer)
     assert_match(/<input type="text" name="song\[artist_attributes\]\[producer_attributes\]\[studio\]" id="song_artist_attributes_producer_attributes_studio" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Create Song" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create Song" data-disable-with="Create Song" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a existing instance of SongsFormFixture" do
@@ -390,7 +390,7 @@ class NestedModelRenderingTest < ActionView::TestCase
     assert_match(/<input type="text" value="#{producer.studio}" name="song\[artist_attributes\]\[producer_attributes\]\[studio\]" id="song_artist_attributes_producer_attributes_studio" \/>/, output_buffer)
     assert_match(/<input type="hidden" value="#{producer.id}" name="song\[artist_attributes\]\[producer_attributes\]\[id\]" id="song_artist_attributes_producer_attributes_id" \/>/, output_buffer)
 
-    assert_match(/<input type="submit" name="commit" value="Update Song" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update Song" data-disable-with="Update Song" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a new instance of ConferenceFormFixture" do
@@ -447,7 +447,7 @@ class NestedModelRenderingTest < ActionView::TestCase
       assert_match(/<input type="text" name="conference\[speaker_attributes\]\[presentations_attributes\]\[#{i}\]\[duration\]" id="conference_speaker_attributes_presentations_attributes_#{i}_duration" \/>/, output_buffer)
     end
 
-    assert_match(/<input type="submit" name="commit" value="Create Conference" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create Conference" data-disable-with="Create Conference" \/>/, output_buffer)
   end
 
   test "form_for renders correct a existing instance of ConferenceFormFixture" do
@@ -507,7 +507,7 @@ class NestedModelRenderingTest < ActionView::TestCase
       assert_match(/<input type="text" value="#{presentations[i].duration}" name="conference\[speaker_attributes\]\[presentations_attributes\]\[#{i}\]\[duration\]" id="conference_speaker_attributes_presentations_attributes_#{i}_duration" \/>/, output_buffer)
     end
 
-    assert_match(/<input type="submit" name="commit" value="Update Conference" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update Conference" data-disable-with="Update Conference" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a new instance of SurveyFormFixture" do
@@ -548,7 +548,7 @@ class NestedModelRenderingTest < ActionView::TestCase
       assert_match(/<input type="text" name="survey\[questions_attributes\]\[0\]\[answers_attributes\]\[#{i}\]\[content\]" id="survey_questions_attributes_0_answers_attributes_#{i}_content" \/>/, output_buffer)
     end
 
-    assert_match(/<input type="submit" name="commit" value="Create Survey" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Create Survey" data-disable-with="Create Survey" \/>/, output_buffer)
   end
 
   test "form_for renders correctly a existing instance of SurveyFormFixture" do
@@ -592,6 +592,6 @@ class NestedModelRenderingTest < ActionView::TestCase
       assert_match(/<input type="text" value="#{questions[0].answers[i].content}" name="survey\[questions_attributes\]\[0\]\[answers_attributes\]\[#{i}\]\[content\]" id="survey_questions_attributes_0_answers_attributes_#{i}_content" \/>/, output_buffer)
     end
 
-    assert_match(/<input type="submit" name="commit" value="Update Survey" \/>/, output_buffer)
+    assert_match(/<input type="submit" name="commit" value="Update Survey" data-disable-with="Update Survey" \/>/, output_buffer)
   end
 end
