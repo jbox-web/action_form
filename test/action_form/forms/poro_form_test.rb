@@ -1,5 +1,5 @@
 require 'test_helper'
-require_relative 'poro_form_fixture'
+require_relative '../../fixtures/poro_form_fixture'
 
 class PoroFormTest < ActiveSupport::TestCase
   include ActiveModel::Lint::Tests
