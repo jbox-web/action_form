@@ -1,6 +1,6 @@
 require 'test_helper'
-require_relative '../fixtures/user_form_fixture'
-require_relative '../fixtures/user_with_email_form_fixture'
+require_relative '../../fixtures/user_form_fixture'
+require_relative '../../fixtures/user_with_email_form_fixture'
 
 class NestedModelRenderingTest < ActionView::TestCase
   fixtures :all

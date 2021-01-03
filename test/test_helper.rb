@@ -23,6 +23,4 @@ Rails.backtrace_cleaner.remove_silencers!
 # in spec/support/ and its subdirectories.
 Dir[File.expand_path('support/**/*.rb', __dir__)].each { |f| require f }
 
-if ActiveSupport::TestCase.method_defined?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
-end
+ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
