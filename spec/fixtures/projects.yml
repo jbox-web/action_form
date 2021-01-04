@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+yard:
+  name: Yard Work
+
+gsoc:
+  name: Add Form Models
+  description: Nesting models in a single form
+  owner: peter

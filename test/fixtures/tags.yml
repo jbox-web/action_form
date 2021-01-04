@@ -1,7 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-forms:
-  name: Html forms
-
-models:
-  name: Nested models
