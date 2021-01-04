@@ -12,6 +12,12 @@ Gem::Specification.new do |s|
   s.summary     = 'Create nested forms with ease.'
   s.description = 'An alternative layer to accepts_nested_attributes_for by using Form Models.'
   s.license     = 'MIT'
+  s.metadata    = {
+    'homepage_uri'    => 'https://github.com/jbox-web/action_form',
+    'changelog_uri'   => 'https://github.com/jbox-web/action_form/blob/master/CHANGELOG.md',
+    'source_code_uri' => 'https://github.com/jbox-web/action_form',
+    'bug_tracker_uri' => 'https://github.com/jbox-web/action_form/issues'
+  }
 
   s.required_ruby_version = '>= 2.5.0'
 
