@@ -36,7 +36,7 @@ jobs:
       - name: Setup Ruby cache
         uses: actions/cache@v2
         with:
-          path: "${GITHUB_WORKSPACE}/vendor/bundle"
+          path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ matrix.ruby }}-${{ matrix.rails }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-${{ matrix.ruby }}-${{ matrix.rails }}-
@@ -44,17 +44,17 @@ jobs:
       - name: Bundle
         env:
           RAILS_VERSION: ${{ matrix.rails }}
-          BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.rails }}.gemfile
+          BUNDLE_GEMFILE: gemfiles/${{ matrix.rails }}.gemfile
         run: |
           gem install bundler
-          bundle config path "${GITHUB_WORKSPACE}/vendor/bundle"
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
       - name: RSpec & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           RAILS_VERSION: ${{ matrix.rails }}
-          BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.rails }}.gemfile
+          BUNDLE_GEMFILE: gemfiles/${{ matrix.rails }}.gemfile
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: bin/rake
