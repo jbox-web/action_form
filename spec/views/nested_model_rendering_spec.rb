@@ -8,6 +8,8 @@ RSpec.describe('NestedModelRendering') do
     @output_buffer = super
   end
 
+  let(:autocomplete) { Rails::VERSION::MAJOR == 7 ? 'autocomplete="off" ' : '' }
+
   it("form_for renders correctly a new instance of UserFormFixture") do
     user = User.new
     user_form = UserFormFixture.new(user)
@@ -131,7 +133,7 @@ RSpec.describe('NestedModelRendering') do
     expect(output_buffer).to(match(/<\/select>/))
     expect(output_buffer).to(match(/<label for="user_email_attributes_address">Address<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{user_form.email.address}" name="user\[email_attributes\]\[address\]" id="user_email_attributes_address" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{user_form.email.id}" name="user\[email_attributes\]\[id\]" id="user_email_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{user_form.email.id}" name="user\[email_attributes\]\[id\]" id="user_email_attributes_id" \/>/))
     expect(output_buffer).to(match(/<input type="submit" name="commit" value="Update User" data-disable-with="Update User" \/>/))
   end
 
@@ -217,12 +219,12 @@ RSpec.describe('NestedModelRendering') do
     expect(output_buffer).to(match(/<\/select>/))
     expect(output_buffer).to(match(/<label for="user_email_attributes_address">Address<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{user_form.email.address}" name="user\[email_attributes\]\[address\]" id="user_email_attributes_address" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{user_form.email.id}" name="user\[email_attributes\]\[id\]" id="user_email_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{user_form.email.id}" name="user\[email_attributes\]\[id\]" id="user_email_attributes_id" \/>/))
     expect(output_buffer).to(match(/<label for="user_profile_attributes_twitter_name">Twitter name<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{user_form.profile.twitter_name}" name="user\[profile_attributes\]\[twitter_name\]" id="user_profile_attributes_twitter_name" \/>/))
     expect(output_buffer).to(match(/<label for="user_profile_attributes_github_name">Github name<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{user_form.profile.github_name}" name="user\[profile_attributes\]\[github_name\]" id="user_profile_attributes_github_name" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{user_form.profile.id}" name="user\[profile_attributes\]\[id\]" id="user_profile_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{user_form.profile.id}" name="user\[profile_attributes\]\[id\]" id="user_profile_attributes_id" \/>/))
     expect(output_buffer).to(match(/<input type="submit" name="commit" value="Update User" data-disable-with="Update User" \/>/))
   end
 
@@ -298,12 +300,12 @@ RSpec.describe('NestedModelRendering') do
     expect(output_buffer).to(match(/input type="text" value="#{song_form.length}" name="song\[length\]" id="song_length" \/>/))
     expect(output_buffer).to(match(/<label for="song_artist_attributes_name">Name<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{artist.name}" name="song\[artist_attributes\]\[name\]" id="song_artist_attributes_name" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{artist.id}" name="song\[artist_attributes\]\[id\]" id="song_artist_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{artist.id}" name="song\[artist_attributes\]\[id\]" id="song_artist_attributes_id" \/>/))
     expect(output_buffer).to(match(/<label for="song_artist_attributes_producer_attributes_name">Name<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{producer.name}" name="song\[artist_attributes\]\[producer_attributes\]\[name\]" id="song_artist_attributes_producer_attributes_name" \/>/))
     expect(output_buffer).to(match(/<label for="song_artist_attributes_producer_attributes_studio">Studio<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{producer.studio}" name="song\[artist_attributes\]\[producer_attributes\]\[studio\]" id="song_artist_attributes_producer_attributes_studio" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{producer.id}" name="song\[artist_attributes\]\[producer_attributes\]\[id\]" id="song_artist_attributes_producer_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{producer.id}" name="song\[artist_attributes\]\[producer_attributes\]\[id\]" id="song_artist_attributes_producer_attributes_id" \/>/))
     expect(output_buffer).to(match(/<input type="submit" name="commit" value="Update Song" data-disable-with="Update Song" \/>/))
   end
 
@@ -389,7 +391,7 @@ RSpec.describe('NestedModelRendering') do
     expect(output_buffer).to(match(/<input type="text" value="#{speaker.name}" name="conference\[speaker_attributes\]\[name\]" id="conference_speaker_attributes_name" \/>/))
     expect(output_buffer).to(match(/<label for="conference_speaker_attributes_occupation">Occupation<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="#{speaker.occupation}" name="conference\[speaker_attributes\]\[occupation\]" id="conference_speaker_attributes_occupation" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{speaker.id}" name="conference\[speaker_attributes\]\[id\]" id="conference_speaker_attributes_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{speaker.id}" name="conference\[speaker_attributes\]\[id\]" id="conference_speaker_attributes_id" \/>/))
     [0, 1].each do |i|
       expect(output_buffer).to(match(/<label for="conference_speaker_attributes_presentations_attributes_#{i}_topic">Topic<\/label>/))
       expect(output_buffer).to(match(/<input type="text" value="#{presentations[i].topic}" name="conference\[speaker_attributes\]\[presentations_attributes\]\[#{i}\]\[topic\]" id="conference_speaker_attributes_presentations_attributes_#{i}_topic" \/>/))
@@ -457,7 +459,7 @@ RSpec.describe('NestedModelRendering') do
     expect(output_buffer).to(match(/<input type="text" value="#{survey_form.name}" name="survey\[name\]" id="survey_name" \/>/))
     expect(output_buffer).to(match(/<label for="survey_questions_attributes_0_content">Content<\/label>/))
     expect(output_buffer).to(match(/<input type="text" value="Which language allows closures\?" name="survey\[questions_attributes\]\[0\]\[content\]" id="survey_questions_attributes_0_content" \/>/))
-    expect(output_buffer).to(match(/<input type="hidden" value="#{questions[0].id}" name="survey\[questions_attributes\]\[0\]\[id\]" id="survey_questions_attributes_0_id" \/>/))
+    expect(output_buffer).to(match(/<input #{autocomplete}type="hidden" value="#{questions[0].id}" name="survey\[questions_attributes\]\[0\]\[id\]" id="survey_questions_attributes_0_id" \/>/))
     [0, 1].each do |i|
       expect(output_buffer).to(match(/<label for="survey_questions_attributes_0_answers_attributes_#{i}_content">Content<\/label>/))
       expect(output_buffer).to(match(/<input type="text" value="#{questions[0].answers[i].content}" name="survey\[questions_attributes\]\[0\]\[answers_attributes\]\[#{i}\]\[content\]" id="survey_questions_attributes_0_answers_attributes_#{i}_content" \/>/))
