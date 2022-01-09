@@ -34,4 +34,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3', '~> 1.4.0'
+
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.1.0")
+    s.add_development_dependency 'net-imap'
+    s.add_development_dependency 'net-pop'
+    s.add_development_dependency 'net-smtp'
+  end
 end
