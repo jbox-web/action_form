@@ -22,15 +22,9 @@ jobs:
           - '3.0'
           - '2.7'
         rails:
-          - rails_5.2.6
           - rails_6.0.4
           - rails_6.1.4
           - rails_7.0.1
-        exclude:
-          - ruby: '3.0'
-            rails: rails_5.2.6
-          - ruby: '3.1'
-            rails: rails_5.2.6
 
     steps:
       - name: Checkout
