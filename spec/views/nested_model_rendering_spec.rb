@@ -8,7 +8,7 @@ RSpec.describe('NestedModelRendering') do
     @output_buffer = super
   end
 
-  let(:autocomplete) { Rails::VERSION::MAJOR == 7 ? 'autocomplete="off" ' : '' }
+  let(:autocomplete) { Rails.gem_version >= Gem::Version.new("6.1.5") ? 'autocomplete="off" ' : '' }
 
   it("form_for renders correctly a new instance of UserFormFixture") do
     user = User.new
