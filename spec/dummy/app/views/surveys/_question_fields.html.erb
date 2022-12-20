@@ -1,13 +1,14 @@
 <div class="nested-fields">
-  <div class="field">
-    <%= f.label :content, "Question" %><br>
-    <%= link_to_remove_association "remove", f %><br />
-    <%= f.text_area :content, :cols => 30, :rows => 2 %>
+  <div class="form-group">
+    <%= f.label :content, "Question" %>
+    <%= f.text_area :content, cols: 30, rows: 2, class: "form-control" %>
+    <%= link_to_remove_association "remove", f %>
   </div>
 
-  <h2>Answers</h2>
+  <h3>Answers</h3>
+
   <%= f.fields_for :answers do |answer_fields| %>
-    <%= render "answer_fields", :f => answer_fields %>
+    <%= render "answer_fields", f: answer_fields %>
   <% end %>
 
   <div class="links">

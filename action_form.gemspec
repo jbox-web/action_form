@@ -23,17 +23,21 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n")
 
-  s.add_runtime_dependency 'rails', '>= 5.2'
+  s.add_runtime_dependency 'rails', '>= 6.0'
   s.add_runtime_dependency 'zeitwerk'
 
   s.add_development_dependency 'appraisal'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'cuprite'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'jquery-rails'
+  s.add_development_dependency 'puma'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3', '~> 1.4.0'
+  s.add_development_dependency 'sprockets-rails'
 
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.1.0")
     s.add_development_dependency 'net-imap'

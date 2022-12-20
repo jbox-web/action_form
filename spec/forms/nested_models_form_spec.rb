@@ -18,7 +18,7 @@ RSpec.describe('NestedModelsForm') do
 
   it("forms list contains profile sub-form definition") do
     profile_definition = UserForm.forms.last
-    expect(profile_definition.assoc_name).to(eq(:profile))
+    expect(profile_definition.association_name).to(eq(:profile))
   end
 
   it("profile sub-form contains association name and parent") do

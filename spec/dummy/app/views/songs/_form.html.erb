@@ -11,23 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :length %><br>
-    <%= f.text_field :length %>
+  <div class="form-group">
+    <%= f.label :length %>
+    <%= f.text_field :length, class: "form-control" %>
   </div>
 
-  <h2>Artist Details</h2>
+  <h3>Artist Details</h3>
 
   <%= f.fields_for :artist do |artist_fields| %>
-    <%= render "artist", :artist => artist_fields %>
+    <%= render "artist", artist: artist_fields %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

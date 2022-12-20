@@ -1,5 +1,4 @@
-klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
-class CreateProfiles < klass
+class CreateProfiles < ActiveRecord::Migration[6.0]
   def change
     create_table :profiles do |t|
       t.string :twitter_name

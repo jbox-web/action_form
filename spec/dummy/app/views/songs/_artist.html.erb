@@ -1,9 +1,10 @@
-<div class="field">
-  <%= artist.label :name, "Artist Name" %><br>
-  <%= artist.text_field :name %>
+<div class="form-group">
+  <%= artist.label :name, "Artist Name" %>
+  <%= artist.text_field :name, class: "form-control" %>
 </div>
 
-<h2>Producer Details</h2>
+<h3>Producer Details</h3>
+
 <%= artist.fields_for :producer do |producer_fields| %>
-  <%= render "producer", :producer => producer_fields%>
+  <%= render "producer", producer: producer_fields %>
 <% end %>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 
 # Start SimpleCov
@@ -11,8 +13,13 @@ require File.expand_path('dummy/config/environment.rb', __dir__)
 
 # Load test gems
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'capybara/cuprite'
+require 'sprockets/rails'
 
 # Load our own config
 require_relative 'config_rspec'
+require_relative 'config_capybara'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].sort.each { |f| require f }

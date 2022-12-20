@@ -1,6 +1,12 @@
 <div class="nested-fields">
-  <%= f.text_field :name %>
-  <%= f.text_field :role %>
-  <%= f.text_field :description %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "form-control" %>
+
+  <%= f.label :role %>
+  <%= f.text_field :role, class: "form-control" %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, class: "form-control" %>
+
   <%= link_to_remove_association "remove owner", f %>
 </div>

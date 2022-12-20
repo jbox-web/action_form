@@ -11,14 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, :size => 40 %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, size: 40, class: "form-control" %>
   </div>
 
-  <h2>Questions</h2>
+  <h3>Questions</h3>
+
   <%= f.fields_for :questions do |question_fields| %>
-    <%= render "question_fields", :f => question_fields %>
+    <%= render "question_fields", f: question_fields %>
   <% end %>
 
   <div class="links">
@@ -26,6 +27,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

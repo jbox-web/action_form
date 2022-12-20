@@ -1,15 +1,14 @@
 <div class="nested-fields">
-  <div class="field">
-    <%= f.label :topic %><br>
-    <%= f.text_field :topic %>
+  <div class="form-group">
+    <%= f.label :topic %>
+    <%= f.text_field :topic, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.text_field :duration %>
+  <div class="form-group">
+    <%= f.label :duration %>
+    <%= f.text_field :duration, class: "form-control" %>
   </div>
 
   <%= link_to_remove_association "Delete", f %>
-
   <hr />
 </div>

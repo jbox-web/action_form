@@ -1,5 +1,4 @@
-klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
-class CreateSpeakers < klass
+class CreateSpeakers < ActiveRecord::Migration[6.0]
   def change
     create_table :speakers do |t|
       t.string :name

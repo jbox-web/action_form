@@ -1,4 +1,6 @@
 RSpec.configure do |config|
+  config.include Capybara::DSL
+
   # Use DB agnostic schema by default
   load Rails.root.join('db', 'schema.rb').to_s
 

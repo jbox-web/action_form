@@ -11,22 +11,25 @@
     </div>
   <% end %>
 
-  <h2>Conference Details</h2>
-  <div class="field">
-    <%= f.label :name, "Conference Name" %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
+  <h3>Conference Details</h3>
+
+  <div class="form-group">
+    <%= f.label :name, "Conference Name" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <h2>Speaker Details</h2>
+  <div class="form-group">
+    <%= f.label :city %>
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+
+  <h3>Speaker Details</h3>
+
   <%= f.fields_for :speaker do |speaker_fields| %>
-    <%= render "speaker", :f => speaker_fields %>
+    <%= render "speaker", f: speaker_fields %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

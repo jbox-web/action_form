@@ -8,7 +8,7 @@
   </p>
 </div>
 
-<table>
+<table class="table">
   <tr>
     <td>Name</td>
     <td><%= @project.name %></td>
@@ -25,37 +25,51 @@
   List all the tasks here
 </p>
 
-<table>
-  <% @project.tasks.each do |task| %>
-    <tr>
-      <td><%= task.name %></td>
-      <td><%= task.description %></td>
-      <td><%= task.done %></td>
-    </tr>
-  <% end %>
+<table class="table">
+  <thead>
+    <th>name</th>
+    <th>description</th>
+    <th>done</th>
+    <th>sub_tasks</th>
+  </thead>
+  <tbody>
+    <% @project.tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.done %></td>
+        <td><%= task.sub_tasks.map(&:name) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <h3>Contributors</h3>
 
-<table>
-  <% @project.contributors.each do |contributor| %>
-    <tr>
-      <td><%= contributor.name %></td>
-      <td><%= contributor.role %></td>
-      <td><%= contributor.description %></td>
-    </tr>
-  <% end %>
+<table class="table">
+  <thead>
+    <th>name</th>
+    <th>role</th>
+    <th>description</th>
+  </thead>
+  <tbody>
+    <% @project.contributors.each do |contributor| %>
+      <tr>
+        <td><%= contributor.name %></td>
+        <td><%= contributor.role %></td>
+        <td><%= contributor.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <h3>Tags</h3>
 
-<table>
+<ul>
   <% @project.tags.each do |tag| %>
-    <tr>
-      <td><%= tag.name %></td>
-    </tr>
+    <li><%= tag.name %></li>
   <% end %>
-</table>
+</ul>
 
 <%= link_to 'Edit', edit_project_path(@project) %>
 <%= '|' %>

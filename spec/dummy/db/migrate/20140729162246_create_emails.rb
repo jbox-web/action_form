@@ -1,5 +1,4 @@
-klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
-class CreateEmails < klass
+class CreateEmails < ActiveRecord::Migration[6.0]
   def change
     create_table :emails do |t|
       t.string :address

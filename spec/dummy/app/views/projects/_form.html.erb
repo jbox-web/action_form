@@ -1,43 +1,43 @@
 <%= form_for @project_form, wrapper: 'inline' do |f| %>
-  <%= f.text_field :name, :hint => 'The title of your project' %>
+  <%= f.text_field :name, hint: 'The title of your project', class: "form-control" %>
 
   <h3>Tasks (:has_many --nested)</h3>
   <div id="tasks">
     <%= f.fields_for :tasks, wrapper: 'inline' do |task| %>
-      <%= render 'task_fields', :f => task %>
+      <%= render 'task_fields', f: task %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'add task', f, :tasks, :render_options => { :wrapper => 'inline' } %>
+      <%= link_to_add_association 'add task', f, :tasks, render_options: { wrapper: 'inline' } %>
     </div>
   </div>
 
   <h3>People (:has_many)</h3>
   <div id="people">
     <%= f.fields_for :contributors, wrapper: 'inline' do |contributor| %>
-      <%= render 'contributor_fields', :f => contributor %>
+      <%= render 'contributor_fields', f: contributor %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'add contributor', f, :contributors, :render_options => { :wrapper => 'inline' } %>
+      <%= link_to_add_association 'add contributor', f, :contributors, render_options: { wrapper: 'inline' } %>
     </div>
   </div>
 
   <h3>Owner (:belongs_to)</h3>
   <div id="owner">
     <div id="owner_from_list">
-      <%= f.collection_select :owner, Person.order(:name), :id, :name, :prompt => 'Choose an existing owner' %>
+      <%= f.collection_select :owner_id, Person.order(:name), :id, :name, prompt: 'Choose an existing owner' %>
     </div>
-    <%= link_to_add_association 'add a new person as owner', f, :owner, :render_options => { :wrapper => 'inline' } %>
+    <%= link_to_add_association 'add a new person as owner', f, :owner, render_options: { wrapper: 'inline' } %>
   </div>
 
   <h3>Tags (:has_many :through)</h3>
   <div id="tags">
     <%= f.fields_for :project_tags, wrapper: 'inline' do |project_tag| %>
-      <%= render 'project_tag_fields', :f => project_tag %>
+      <%= render 'project_tag_fields', f: project_tag %>
     <% end %>
-    <%= link_to_add_association 'add a tag', f, :project_tags, :render_options => { :wrapper => 'inline' } %>
+    <%= link_to_add_association 'add a tag', f, :project_tags, render_options: { wrapper: 'inline' } %>
   </div>
 
   <div class="actions">
-    <%= f.button :submit, :disable_with => 'Please wait ...' %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

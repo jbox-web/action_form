@@ -1,5 +1,6 @@
 class UserForm < ActionForm::Base
   self.main_model = :user
+
   attributes :name, :age, :gender, required: true
 
   association :email do

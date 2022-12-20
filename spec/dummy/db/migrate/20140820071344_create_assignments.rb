@@ -1,5 +1,4 @@
-klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
-class CreateAssignments < klass
+class CreateAssignments < ActiveRecord::Migration[6.0]
   def change
     create_table :assignments do |t|
       t.string :name

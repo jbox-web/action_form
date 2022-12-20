@@ -21,7 +21,7 @@ RSpec.describe('NestedModelForm') do
 
   it("forms list contains form definitions") do
     email_definition = UserWithEmailFormFixture.forms.first
-    expect(email_definition.assoc_name).to(eq(:email))
+    expect(email_definition.association_name).to(eq(:email))
   end
 
   it("contains getter for email sub-form") do

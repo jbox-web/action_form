@@ -29,10 +29,10 @@ RSpec.describe('ProjectForm') do
     contributors_definition = ProjectForm.forms[1]
     project_tags_definition = ProjectForm.forms[2]
     owner_definition = ProjectForm.forms[3]
-    expect(tasks_definition.assoc_name).to(eq(:tasks))
-    expect(contributors_definition.assoc_name).to(eq(:contributors))
-    expect(project_tags_definition.assoc_name).to(eq(:project_tags))
-    expect(owner_definition.assoc_name).to(eq(:owner))
+    expect(tasks_definition.association_name).to(eq(:tasks))
+    expect(contributors_definition.association_name).to(eq(:contributors))
+    expect(project_tags_definition.association_name).to(eq(:project_tags))
+    expect(owner_definition.association_name).to(eq(:owner))
   end
 
   it("project form provides getter method for tasks sub-form") do

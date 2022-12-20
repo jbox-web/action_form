@@ -1,5 +1,4 @@
-klass = Rails::VERSION::MAJOR == 4 ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
-class CreateTags < klass
+class CreateTags < ActiveRecord::Migration[6.0]
   def change
     create_table :tags do |t|
       t.string :name

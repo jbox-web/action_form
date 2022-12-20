@@ -1,8 +1,13 @@
 <div class="nested-fields">
   <fieldset>
     <legend>Sub Task</legend>
-    <%= f.text_field :name %>
-    <%= f.text_field :description %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description, class: "form-control" %>
+
     <%= link_to_remove_association "remove sub-task", f %>
   </fieldset>
 </div>

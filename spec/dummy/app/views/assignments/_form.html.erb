@@ -11,14 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <h2>Tasks Details</h2>
+  <h3>Tasks Details</h3>
+
   <%= f.fields_for :tasks do |task_fields| %>
-    <%= render "task_fields", :f => task_fields %>
+    <%= render "task_fields", f: task_fields %>
   <% end %>
 
   <div class="links">
@@ -26,6 +27,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

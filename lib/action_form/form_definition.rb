@@ -2,30 +2,32 @@
 
 module ActionForm
   class FormDefinition
-    attr_accessor :assoc_name, :proc, :parent, :records
+    # *parent* is set by *populate_forms* when building final form object
+    attr_accessor :parent
 
-    def initialize(assoc_name, block, options = {})
-      @assoc_name = assoc_name
-      @proc       = block
-      @records    = options[:records]
+    # association_name is read by *populate_forms* to register the form object
+    attr_reader :association_name
+
+    def initialize(association_name, block, options = {})
+      @association_name = association_name
+      @proc             = block
+      @records          = options[:records]
     end
 
     def to_form
-      macro = association_reflection.macro
-
-      case macro
+      case association_reflection.macro
       when :has_one, :belongs_to
-        Form.new(assoc_name, parent, proc)
+        Form.new(@association_name, parent, @proc)
       when :has_many
-        FormCollection.new(assoc_name, parent, proc, { records: records })
+        FormCollection.new(@association_name, parent, @proc, { records: @records })
       end
     end
 
     private
 
-    def association_reflection
-      parent.class.reflect_on_association(@assoc_name)
-    end
-  end
+      def association_reflection
+        parent.class.reflect_on_association(@association_name)
+      end
 
+  end
 end

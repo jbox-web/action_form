@@ -1,16 +1,17 @@
-<div class="field">
-  <%= f.label :name, "Speaker Name" %><br>
-  <%= f.text_field :name %>
+<div class="form-group">
+  <%= f.label :name, "Speaker Name" %>
+  <%= f.text_field :name, class: "form-control" %>
 </div>
 
-<div class="field">
-  <%= f.label :occupation %><br>
-  <%= f.text_field :occupation %>
+<div class="form-group">
+  <%= f.label :occupation %>
+  <%= f.text_field :occupation, class: "form-control" %>
 </div>
 
-<h2>Presentantions</h2>
+<h3>Presentations</h3>
+
 <%= f.fields_for :presentations do |presentations_fields| %>
-  <%= render "presentation_fields", :f => presentations_fields %>
+  <%= render "presentation_fields", f: presentations_fields %>
 <% end %>
 
 <div class="links">
