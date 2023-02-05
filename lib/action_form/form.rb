@@ -13,7 +13,7 @@ module ActionForm
 
     # Be compliant with AR (delegate *class* method to model to get the right translations in forms)
     # See *human_attribute_name* in FormModelWrapper
-    delegate :id, :_destroy, :persisted?, :class, to: :model
+    delegate :id, :_destroy, :persisted?, to: :model
 
     def initialize(association_name, parent, proc, model = nil)
       @association_name       = association_name
@@ -102,6 +102,10 @@ module ActionForm
           public_send(method_sym, *arguments, &block)
         end
       end
+    end
+
+    def to_model
+      FormModelWrapper.new(form: self, model: model)
     end
 
     private
