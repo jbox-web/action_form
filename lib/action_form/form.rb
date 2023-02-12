@@ -69,6 +69,15 @@ module ActionForm
       RUBY
     end
 
+    def virtual_attributes(*attributes)
+      class_eval do
+        attributes.each do |attribute|
+          attr_accessor attribute
+        end
+      end
+    end
+    alias_method :virtual_attribute, :virtual_attributes
+
     def submit(params)
       if association_reflection.macro == :belongs_to
         @model = parent.public_send("build_#{association_name}") unless call_reject_if(params_for_current_scope(params))

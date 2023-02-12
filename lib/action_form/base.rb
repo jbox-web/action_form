@@ -73,6 +73,14 @@ module ActionForm
           def #{name}_attributes=; end
         RUBY
       end
+
+      def virtual_attributes(*attributes)
+        attributes.each do |attribute|
+          attr_accessor attribute
+        end
+      end
+      alias_method :virtual_attribute, :virtual_attributes
+
     end
 
     # Create some accesors
