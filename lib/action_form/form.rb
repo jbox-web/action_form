@@ -13,11 +13,15 @@ module ActionForm
     include FormHelpers
 
     # Create some getters
-    attr_reader :association_name, :parent, :association_reflection, :proc, :model, :forms
+    attr_reader :association_name, :parent, :association_reflection, :proc, :model, :forms, :to_model
 
-    # Be compliant with AR (delegate *class* method to model to get the right translations in forms)
-    # See *human_attribute_name* in FormModelWrapper
-    delegate :id, :_destroy, :persisted?, to: :model
+    # Be compliant with AR
+    # This object will be passed to *form_for*
+    delegate :new_record?, :deleted?, :persisted?,
+             :id, :_destroy,
+             to: :model
+
+    delegate :model_name, to: :to_model
 
     def initialize(association_name, parent, proc, model = nil)
       @association_name       = association_name
@@ -25,6 +29,7 @@ module ActionForm
       @association_reflection = parent.class.reflect_on_association(association_name)
       @proc                   = proc
       @model                  = assign_model(model)
+      @to_model               = FormModelWrapper.new(form: self, model: @model)
       @forms                  = []
 
       enable_autosave
@@ -122,10 +127,6 @@ module ActionForm
         # call instance level validation methods (called from *validate* class method)
         super
       end
-    end
-
-    def to_model
-      FormModelWrapper.new(form: self, model: model)
     end
 
     private
