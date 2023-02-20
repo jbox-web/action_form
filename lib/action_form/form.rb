@@ -5,6 +5,10 @@ module ActionForm
     # Form object are validatable
     include ActiveModel::Validations
 
+    # Remove *validate* instance method as it conflicts with *method_missing*
+    # See: https://github.com/rails/rails/blob/main/activemodel/lib/active_model/validations.rb#L371
+    undef_method :validate
+
     # Include forms common methods (submit)
     include FormHelpers
 
@@ -106,10 +110,17 @@ module ActionForm
     end
 
     def method_missing(method_sym, *arguments, &block)
+      # dont break existing tests
+      return if method_sym == :id=
+
+      # call validates/validate class methods
       if method_sym =~ /^validates?$/
         class_eval do
           public_send(method_sym, *arguments, &block)
         end
+      else
+        # call instance level validation methods (called from *validate* class method)
+        super
       end
     end
 

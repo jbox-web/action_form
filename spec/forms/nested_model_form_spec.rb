@@ -87,6 +87,27 @@ RSpec.describe('NestedModelForm') do
     expect(@email_form.valid?).to(eq(true))
   end
 
+  it("email sub-form can use validates method") do
+    params = { :name => "Petrakos", :age => "23", :gender => "0", :email_attributes => ({ :address => "petrakos1@gmail.com" }) }
+    @form.submit(params)
+    expect(@form.valid?).to(eq(false))
+    assert_includes(@form.errors.messages[:'email.address'], "is too long (maximum is 18 characters)")
+  end
+
+  it("email sub-form can use validate method") do
+    params = { :name => "Petrakos", :age => "23", :gender => "0", :email_attributes => ({ :address => "petrakos1@gmail.com" }) }
+    @form.submit(params)
+    expect(@form.valid?).to(eq(false))
+    assert_includes(@form.errors.messages[:'email.address'], "is invalid")
+  end
+
+  it("main form can use validate method") do
+    params = { :name => "Petrakos1", :age => "23", :gender => "0", :email_attributes => ({ :address => "petrakos@gmail.com" }) }
+    @form.submit(params)
+    expect(@form.valid?).to(eq(false))
+    assert_includes(@form.errors.messages[:name], "is invalid")
+  end
+
   it("main form syncs its model and the models in nested sub-forms") do
     params = { :name => "Petrakos", :age => "23", :gender => "0", :email_attributes => ({ :address => "petrakos@gmail.com" }) }
     @form.submit(params)
