@@ -5,6 +5,9 @@ module ActionForm
     # Form object are validatable
     include ActiveModel::Validations
 
+    # Include ActiveModel::Validations::Callbacks so we can use *before_validation* in our forms
+    include ActiveModel::Validations::Callbacks
+
     # Remove *validate* instance method as it conflicts with *method_missing*
     # See: https://github.com/rails/rails/blob/main/activemodel/lib/active_model/validations.rb#L371
     undef_method :validate
@@ -23,6 +26,18 @@ module ActionForm
 
     delegate :model_name, to: :to_model
 
+    class << self
+
+      def attribute_method?(attribute)
+        attributes.include?(attribute.to_sym) || super
+      end
+
+      def attributes
+        @attributes ||= []
+      end
+
+    end
+
     def initialize(association_name, parent, proc, model = nil)
       @association_name       = association_name
       @parent                 = parent
@@ -37,20 +52,14 @@ module ActionForm
     end
 
     # Form DSL method
-    def attributes(*arguments)
+    def attribute(name, opts = {})
+      self.class.attributes << name.to_sym
+
       class_eval do
-        options = arguments.pop if arguments.last.is_a?(Hash)
-
-        if options && options[:required]
-          validates_presence_of(*arguments)
-        end
-
-        arguments.each do |attribute|
-          delegate attribute, "#{attribute}=", to: :model
-        end
+        validates_presence_of(name) if opts[:required]
+        delegate name, "#{name}=", to: :model
       end
     end
-    alias_method :attribute, :attributes
 
     # Form DSL method
     def association(name, options = {}, &block)
@@ -119,7 +128,7 @@ module ActionForm
       return if method_sym == :id=
 
       # call validates/validate class methods
-      if method_sym =~ /^validates?$/
+      if method_sym =~ /^validates?$/ || method_sym == :phony_normalize
         class_eval do
           public_send(method_sym, *arguments, &block)
         end

@@ -1,6 +1,8 @@
 class UserWithEmailFormFixture < ActionForm::Base
   self.main_model = :user
-  attributes :name, :age, :gender, required: true
+  attribute :name,   required: true
+  attribute :age,    required: true
+  attribute :gender, required: true
 
   association :email do
     attribute :address, required: true

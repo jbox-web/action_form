@@ -36,19 +36,16 @@ module ActionForm
         @forms ||= []
       end
 
-      # Form DSL method
-      def attributes(*names)
-        options = names.pop if names.last.is_a?(Hash)
-
-        if options && options[:required]
-          validates_presence_of(*names)
-        end
-
-        names.each do |attribute|
-          delegate attribute, "#{attribute}=", to: :model
-        end
+      def attributes
+        @attributes ||= []
       end
-      alias_method :attribute, :attributes
+
+      # Form DSL method
+      def attribute(name, opts = {})
+        attributes << name
+        validates_presence_of(name) if opts[:required]
+        delegate name, "#{name}=", to: :model
+      end
 
       # Form DSL method
       def association(name, options = {}, &block)

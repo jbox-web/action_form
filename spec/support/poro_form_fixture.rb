@@ -10,5 +10,6 @@ end
 
 class PoroFormFixture < ActionForm::Base
   self.main_model = :conference
-  attributes :name, :city, required: true
+  attribute :name, required: true
+  attribute :city, required: true
 end

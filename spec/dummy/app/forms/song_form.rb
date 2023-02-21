@@ -1,11 +1,13 @@
 class SongForm < ActionForm::Base
-  attributes :title, :length, required: true
+  attribute :title,  required: true
+  attribute :length, required: true
 
   association :artist do
     attribute :name, required: true
 
     association :producer do
-      attributes :name, :studio, required: true
+      attribute :name,   required: true
+      attribute :studio, required: true
     end
   end
 end

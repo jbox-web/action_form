@@ -1,14 +1,17 @@
 class UserForm < ActionForm::Base
   self.main_model = :user
 
-  attributes :name, :age, :gender, required: true
+  attribute :name,   required: true
+  attribute :age,    required: true
+  attribute :gender, required: true
 
   association :email do
     attribute :address, required: true
   end
 
   association :profile do
-    attributes :twitter_name, :github_name, required: true
+    attribute :twitter_name, required: true
+    attribute :github_name,  required: true
   end
 
   validates :name, length: { in: 6..20 }
