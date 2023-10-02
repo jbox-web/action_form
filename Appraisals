@@ -4,7 +4,7 @@ RAILS_VERSIONS = %w[
   6.0.6
   6.1.7
   7.0.1
-  7.0.4
+  7.0.8
 ].freeze
 
 RAILS_VERSIONS.each do |version|
