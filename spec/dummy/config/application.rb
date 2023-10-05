@@ -14,6 +14,8 @@ require 'jquery-rails'
 
 module Dummy
   class Application < Rails::Application
+    # config.load_defaults Rails::VERSION::STRING.to_f
+
     config.autoload_paths << Rails.root.join('lib')
   end
 end
