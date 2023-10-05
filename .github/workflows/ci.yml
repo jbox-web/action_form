@@ -23,6 +23,7 @@ jobs:
           - '3.0'
           - 'head'
         rails:
+          - rails_7.1.0
           - rails_7.0.8
           - rails_6.1.7
           - rails_6.0.6
