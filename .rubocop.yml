@@ -1,6 +1,11 @@
+---
+require:
+  - rubocop-capybara
+  - rubocop-rake
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
-  SuggestExtensions: false
   TargetRubyVersion: 3.0
   Exclude:
     - bin/*
