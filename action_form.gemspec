@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-rake'
   s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3', '~> 1.4.0'
+  s.add_development_dependency 'sqlite3', '~> 1.5.0'
   s.add_development_dependency 'sprockets-rails'
 
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.1.0")
