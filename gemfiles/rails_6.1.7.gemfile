@@ -2,6 +2,28 @@
 
 source "https://rubygems.org"
 
+gem "appraisal", git: "https://github.com/n-rodriguez/appraisal.git", branch: "wip/combustion"
+gem "capybara"
+gem "cuprite"
+gem "guard-rspec"
+gem "jquery-rails"
+gem "puma"
+gem "rake"
+gem "rspec-rails"
+gem "rubocop"
+gem "rubocop-capybara"
+gem "rubocop-rake"
+gem "rubocop-rspec"
+gem "simplecov"
+gem "sqlite3", "~> 1.5.0"
 gem "rails", "6.1.7"
+
+install_if -> { Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.3.0") } do
+  gem "base64"
+  gem "bigdecimal"
+  gem "mutex_m"
+  gem "drb"
+  gem "logger"
+end
 
 gemspec path: "../"
