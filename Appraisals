@@ -3,6 +3,7 @@
 RAILS_VERSIONS = %w[
   7.0.8
   7.1.3
+  7.2.0
 ].freeze
 
 RAILS_VERSIONS.each do |version|
@@ -29,6 +30,9 @@ RAILS_VERSIONS.each do |version|
       install_if '-> { Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.4.0") }' do
         gem "logger"
       end
+
+    when "7.2.0"
+      gem "sprockets-rails"
     end
 
   end
