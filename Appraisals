@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RAILS_VERSIONS = %w[
-  6.1.7
   7.0.8
   7.1.3
 ].freeze
@@ -11,16 +10,6 @@ RAILS_VERSIONS.each do |version|
     gem 'rails', version
 
     case version
-    when "6.1.7"
-      # Fix: LoadError: cannot load such file -- base64
-      install_if '-> { Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.3.0") }' do
-        gem "base64"
-        gem "bigdecimal"
-        gem "mutex_m"
-        gem "drb"
-        gem "logger"
-      end
-
     when "7.0.8"
       gem "sprockets-rails"
 
