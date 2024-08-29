@@ -48,7 +48,7 @@ module ActionForm
       end
 
       # Form DSL method
-      def association(name, options = {}, &block)
+      def association(name, options = {}, &block) # rubocop:disable Metrics/MethodLength
         # store form definition in an object
         forms << FormDefinition.new(name, block, options)
 
@@ -139,7 +139,7 @@ module ActionForm
 
           # save form object
           @forms << nested_form
-          instance_variable_set("@#{form_name}", nested_form)
+          instance_variable_set(:"@#{form_name}", nested_form)
         end
       end
 

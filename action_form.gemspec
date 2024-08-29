@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'homepage_uri'    => 'https://github.com/jbox-web/action_form',
     'changelog_uri'   => 'https://github.com/jbox-web/action_form/blob/master/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/jbox-web/action_form',
-    'bug_tracker_uri' => 'https://github.com/jbox-web/action_form/issues'
+    'bug_tracker_uri' => 'https://github.com/jbox-web/action_form/issues',
   }
 
   s.required_ruby_version = '>= 3.1.0'

@@ -8,7 +8,7 @@ module ActionForm
         if nested_params?(value)
           fill_association_with_attributes(key, value)
         else
-          public_send("#{key}=", value)
+          public_send(:"#{key}=", value)
         end
       end
     end
@@ -48,7 +48,7 @@ module ActionForm
       end
 
       def find_form_by_assoc_name(assoc_name)
-        @forms.select { |form| form.represents?(assoc_name) }.first
+        @forms.find { |form| form.represents?(assoc_name) }
       end
 
       def aggregate_form_errors(forms)

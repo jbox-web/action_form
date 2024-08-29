@@ -4,6 +4,7 @@ require:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   NewCops: enable
@@ -13,35 +14,69 @@ AllCops:
     - gemfiles/*
     - spec/**/*
 
+Gemspec/RequireMFA:
+  Enabled: false
+
+#########
+# STYLE #
+#########
+
 Style/Documentation:
   Enabled: false
 
-Layout/EmptyLinesAroundModuleBody:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: false
+
+Style/ArgumentsForwarding:
+  Enabled: false
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+##########
+# LAYOUT #
+##########
+
+Layout/LineLength:
+  Max: 130
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
   Enabled: false
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
-Layout/LineLength:
-  Max: 110
-
-Metrics/MethodLength:
-  Max: 15
-
-Naming/PredicateName:
+Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
-Lint/RaiseException:
-  Enabled: true
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
 
-Lint/StructNewOverride:
-  Enabled: true
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
 
-Style/HashEachMethods:
-  Enabled: true
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
 
-Style/HashTransformKeys:
-  Enabled: true
+##########
+# NAMING #
+##########
 
-Style/HashTransformValues:
-  Enabled: true
+Naming/BlockForwarding:
+  Enabled: false

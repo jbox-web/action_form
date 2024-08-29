@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ActionForm
-  class FormCollection
+  class FormCollection # rubocop:disable Metrics/ClassLength
     include ActiveModel::Validations
 
     attr_reader :association_name, :parent, :proc, :records, :forms
@@ -45,10 +45,8 @@ module ActionForm
       @forms
     end
 
-    def each
-      @forms.each do |form|
-        yield form
-      end
+    def each(&block)
+      @forms.each(&block)
     end
 
     # used by view helper to add/remove associations
@@ -112,7 +110,7 @@ module ActionForm
       end
 
       def find_form_by_model_id(id)
-        @forms.select { |form| form.id == id.to_i }.first
+        @forms.find { |form| form.id == id.to_i }
       end
 
       UNASSIGNABLE_KEYS = %w[id _destroy].freeze
@@ -121,10 +119,10 @@ module ActionForm
       def assign_to_or_mark_for_destruction(form, attributes)
         form.submit(attributes.except(*UNASSIGNABLE_KEYS))
 
-        if destroy_flag?(attributes)
-          form.delete
-          remove_form(form)
-        end
+        return unless destroy_flag?(attributes)
+
+        form.delete
+        remove_form(form)
       end
 
       def destroy_flag?(attributes)
@@ -146,8 +144,8 @@ module ActionForm
         end
       end
 
-      def dynamic_key?(i)
-        i >= @forms.size
+      def dynamic_key?(key)
+        key >= @forms.size
       end
 
       REJECT_ALL_BLANK_PROC = proc { |attributes| attributes.all? { |key, value| key == '_destroy' || value.blank? } }

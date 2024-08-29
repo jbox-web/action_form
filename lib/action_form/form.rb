@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ActionForm
-  class Form
+  class Form # rubocop:disable Metrics/ClassLength
     # Form object are validatable
     include ActiveModel::Validations
 
@@ -62,7 +62,7 @@ module ActionForm
     end
 
     # Form DSL method
-    def association(name, options = {}, &block)
+    def association(name, options = {}, &block) # rubocop:disable Metrics/MethodLength
       macro = model.class.reflect_on_association(name).macro
       form_definition = FormDefinition.new(name, block, options)
       form_definition.parent = @model
@@ -80,7 +80,7 @@ module ActionForm
 
       nested_form = form_definition.to_form
       @forms << nested_form
-      instance_variable_set("@#{name}", nested_form)
+      instance_variable_set(:"@#{name}", nested_form)
 
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{name}_attributes=; end
@@ -97,8 +97,8 @@ module ActionForm
     alias_method :virtual_attribute, :virtual_attributes
 
     def submit(params)
-      if association_reflection.macro == :belongs_to
-        @model = parent.public_send("build_#{association_name}") unless call_reject_if(params_for_current_scope(params))
+      if association_reflection.macro == :belongs_to && !call_reject_if(params_for_current_scope(params))
+        @model = parent.public_send(:"build_#{association_name}")
       end
 
       super
@@ -123,7 +123,7 @@ module ActionForm
       form.get_model(assoc_name)
     end
 
-    def method_missing(method_sym, *arguments, &block)
+    def method_missing(method_sym, *arguments, &block) # rubocop:disable Style/MissingRespondToMissing
       # dont break existing tests
       return if method_sym == :id=
 
@@ -162,7 +162,7 @@ module ActionForm
 
       def fetch_or_build_model
         object = parent.public_send(association_name)
-        object.nil? ? parent.public_send("build_#{association_name}") : object
+        object.nil? ? parent.public_send(:"build_#{association_name}") : object
       end
 
       def enable_autosave
