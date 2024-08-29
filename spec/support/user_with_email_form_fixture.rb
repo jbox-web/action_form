@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserWithEmailFormFixture < ActionForm::Base
   self.main_model = :user
   attribute :name,   required: true

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :edit, :update, :destroy]
-  before_action :create_new_form, only: [:new, :create]
-  before_action :create_edit_form, only: [:edit, :update]
+  before_action :set_survey, only: %i[show edit update destroy]
+  before_action :create_new_form, only: %i[new create]
+  before_action :create_edit_form, only: %i[edit update]
 
   # GET /surveys
   # GET /surveys.json
@@ -62,6 +64,7 @@ class SurveysController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
       @survey = Survey.find(params[:id])
@@ -78,7 +81,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:name, questions_attributes: [:id, :_destroy, :content,
-        answers_attributes: [:id, :_destroy, :content]])
+      params.require(:survey).permit(:name, questions_attributes: [:id, :_destroy, :content, { answers_attributes: %i[id _destroy content] }])
     end
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :create_new_form, only: [:new, :create]
-  before_action :create_edit_form, only: [:edit, :update]
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :create_new_form, only: %i[new create]
+  before_action :create_edit_form, only: %i[edit update]
 
   # GET /users
   # GET /users.json
@@ -61,6 +63,7 @@ class UsersController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -77,7 +80,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :age, :gender, email_attributes: [:id, :address],
-        profile_attributes: [:id, :twitter_name, :github_name])
+      params.require(:user).permit(:name, :age, :gender, email_attributes: %i[id address],
+        profile_attributes: %i[id twitter_name github_name])
     end
 end

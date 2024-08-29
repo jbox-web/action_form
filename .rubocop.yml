@@ -12,7 +12,7 @@ AllCops:
   Exclude:
     - bin/*
     - gemfiles/*
-    - spec/**/*
+    - spec/dummy/**/*
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -45,12 +45,18 @@ Style/Alias:
 Style/RaiseArgs:
   EnforcedStyle: compact
 
+Style/EmptyMethod:
+  Exclude:
+    - spec/**/*
+
 ##########
 # LAYOUT #
 ##########
 
 Layout/LineLength:
   Max: 130
+  Exclude:
+    - spec/**/*
 
 Layout/EmptyLines:
   Enabled: false
@@ -80,3 +86,22 @@ Layout/HashAlignment:
 
 Naming/BlockForwarding:
   Enabled: false
+
+#########
+# RSPEC #
+#########
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/ChangeByZero:
+  Enabled: false
+
+RSpec/NotToNot:
+  EnforcedStyle: to_not

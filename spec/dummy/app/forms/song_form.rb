@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SongForm < ActionForm::Base
   attribute :title,  required: true
   attribute :length, required: true

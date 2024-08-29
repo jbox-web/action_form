@@ -22,4 +22,5 @@ require 'sprockets/rails'
 require_relative 'config_rspec'
 require_relative 'config_capybara'
 
-Dir[File.dirname(__FILE__) + '/support/**/*.rb'].sort.each { |f| require f }
+# Load test helpers
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Capybara.register_driver(:headless_chrome) do |app|
   Capybara::Cuprite::Driver.new(app, headless: true, js_errors: true, window_size: [1200, 800])
 end

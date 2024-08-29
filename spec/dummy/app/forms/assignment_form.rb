@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AssignmentForm < ActionForm::Base
   self.main_model = :assignment
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SurveyForm < ActionForm::Base
   attribute :name, required: true
 

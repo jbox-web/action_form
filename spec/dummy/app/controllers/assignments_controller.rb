@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action :create_new_form, only: [:new, :create]
-  before_action :create_edit_form, only: [:edit, :update]
+  before_action :set_assignment, only: %i[show edit update destroy]
+  before_action :create_new_form, only: %i[new create]
+  before_action :create_edit_form, only: %i[edit update]
 
 
   def index
@@ -52,6 +54,7 @@ class AssignmentsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
       @assignment = Assignment.find(params[:id])
@@ -68,6 +71,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, tasks_attributes: [:id, :name, :_destroy])
+      params.require(:assignment).permit(:name, tasks_attributes: %i[id name _destroy])
     end
 end

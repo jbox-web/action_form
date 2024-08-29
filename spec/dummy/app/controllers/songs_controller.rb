@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
-  before_action :create_new_form, only: [:new, :create]
-  before_action :create_edit_form, only: [:edit, :update]
+  before_action :set_song, only: %i[show edit update destroy]
+  before_action :create_new_form, only: %i[new create]
+  before_action :create_edit_form, only: %i[edit update]
 
   # GET /songs
   # GET /songs.json
@@ -63,6 +65,7 @@ class SongsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_song
       @song = Song.find(params[:id])
@@ -80,6 +83,6 @@ class SongsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
       params.require(:song).permit(:title, :length, artist_attributes:
-        [:name, producer_attributes: [ :name, :studio ] ] )
+        [:name, { producer_attributes: %i[name studio] }] )
     end
 end

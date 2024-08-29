@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectForm < ActionForm::Base
   attribute :name
   attribute :description

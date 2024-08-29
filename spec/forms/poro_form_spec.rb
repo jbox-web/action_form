@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe('PoroForm') do
@@ -8,24 +10,24 @@ RSpec.describe('PoroForm') do
     @model = @form
   end
 
-  it("main form validates itself") do
-    params = { :name => "Euruco", :city => "Athens" }
+  it('main form validates itself') do
+    params = { name: 'Euruco', city: 'Athens' }
     @form.submit(params)
-    expect(@form.valid?).to(eq(true))
-    @form.submit(:name => nil, :city => nil)
-    expect(@form.valid?).to(eq(false))
-    assert_includes(@form.errors[:name], "can't be blank")
-    assert_includes(@form.errors[:city], "can't be blank")
+    expect(@form.valid?).to(be(true))
+    @form.submit(name: nil, city: nil)
+    expect(@form.valid?).to(be(false))
+    expect(@form.errors[:name]).to include("can't be blank")
+    expect(@form.errors[:city]).to include("can't be blank")
   end
 
-  it("save works") do
-    params = { :name => "Euruco", :city => "Athens" }
+  it('save works') do
+    params = { name: 'Euruco', city: 'Athens' }
     @form.submit(params)
     expect(@form.save).to(be_truthy)
   end
 
-  it("raise error") do
-    @form.submit(:name => nil, :city => nil)
+  it('raise error') do
+    @form.submit(name: nil, city: nil)
     expect { @form.save! }.to(raise_error(ActiveRecord::RecordInvalid))
   end
 end

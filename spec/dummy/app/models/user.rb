@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   act_as_gendered
   has_one :email, dependent: :destroy

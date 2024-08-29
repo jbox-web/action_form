@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProducers < ActiveRecord::Migration[6.0]
   def change
     create_table :producers do |t|

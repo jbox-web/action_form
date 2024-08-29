@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserForm < ActionForm::Base
   self.main_model = :user
 

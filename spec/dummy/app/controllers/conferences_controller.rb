@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ConferencesController < ApplicationController
-  before_action :set_conference, only: [:show, :edit, :update, :destroy]
-  before_action :create_new_form, only: [:new, :create]
-  before_action :create_edit_form, only: [:edit, :update]
+  before_action :set_conference, only: %i[show edit update destroy]
+  before_action :create_new_form, only: %i[new create]
+  before_action :create_edit_form, only: %i[edit update]
 
   # GET /conferences
   # GET /conferences.json
@@ -62,6 +64,7 @@ class ConferencesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_conference
       @conference = Conference.find(params[:id])
@@ -79,6 +82,6 @@ class ConferencesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def conference_params
       params.require(:conference).permit(:name, :city, speaker_attributes: [:id, :name, :occupation,
-        presentations_attributes: [:id, :_destroy, :topic, :duration]])
+        { presentations_attributes: %i[id _destroy topic duration] },])
     end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: %i[show edit update destroy]
 
   # GET /projects
   # GET /projects.json
@@ -66,6 +68,7 @@ class ProjectsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
@@ -73,12 +76,12 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :owner_id, tasks_attributes: [ :name, :description, :done, :id, :_destroy,
-      sub_tasks_attributes: [ :name, :description, :done, :id, :_destroy ] ],
-      owner_attributes: [ :name, :role, :description, :id, :_destroy ],
-        contributors_attributes: [ :name, :role, :description, :id, :_destroy ],
-        project_tags_attributes: [ :tag_id, :id, :_destroy, tag_attributes:
-          [ :name, :id, :_destroy ] ])
+      params.require(:project).permit(:name, :owner_id, tasks_attributes: [:name, :description, :done, :id, :_destroy,
+      { sub_tasks_attributes: %i[name description done id _destroy] },],
+      owner_attributes: %i[name role description id _destroy],
+        contributors_attributes: %i[name role description id _destroy],
+        project_tags_attributes: [:tag_id, :id, :_destroy, { tag_attributes:
+          %i[name id _destroy] },])
     end
 
 end

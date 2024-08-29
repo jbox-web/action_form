@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConferenceForm < ActionForm::Base
   attribute :name, required: true
   attribute :city, required: true
