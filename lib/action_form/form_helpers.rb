@@ -58,31 +58,16 @@ module ActionForm
         end
       end
 
-      if ActionForm.rails_error_object?
-        def collect_errors_from(validatable_object)
-          validatable_object.errors.each do |error|
-            key =
-              if validatable_object.respond_to?(:association_name)
-                "#{validatable_object.association_name}.#{error.attribute}"
-              else
-                error.attribute
-              end
+      def collect_errors_from(validatable_object)
+        validatable_object.errors.each do |error|
+          key =
+            if validatable_object.respond_to?(:association_name)
+              "#{validatable_object.association_name}.#{error.attribute}"
+            else
+              error.attribute
+            end
 
-            errors.add(key, error.message)
-          end
-        end
-      else
-        def collect_errors_from(validatable_object)
-          validatable_object.errors.each do |attribute, error|
-            key =
-              if validatable_object.respond_to?(:association_name)
-                "#{validatable_object.association_name}.#{attribute}"
-              else
-                attribute
-              end
-
-            errors.add(key, error)
-          end
+          errors.add(key, error.message)
         end
       end
 

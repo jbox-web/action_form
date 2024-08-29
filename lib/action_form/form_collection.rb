@@ -162,17 +162,9 @@ module ActionForm
         end
       end
 
-      if ActionForm.rails_error_object?
-        def collect_errors_from(model)
-          model.errors.each do |error|
-            errors.add(error.attribute, error.message)
-          end
-        end
-      else
-        def collect_errors_from(model)
-          model.errors.each do |attribute, error|
-            errors.add(attribute, error)
-          end
+      def collect_errors_from(model)
+        model.errors.each do |error|
+          errors.add(error.attribute, error.message)
         end
       end
 
