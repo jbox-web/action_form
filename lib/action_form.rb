@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
+# require external dependencies
 require 'zeitwerk'
-loader = Zeitwerk::Loader.for_gem
-loader.setup
+
+# load zeitwerk
+Zeitwerk::Loader.for_gem.tap do |loader| # rubocop:disable Style/SymbolProc
+  loader.setup
+end
 
 module ActionForm
-  require 'action_form/engine' if defined?(Rails)
+  require_relative 'action_form/engine'
 
   def self.rails_buggy?
     Rails.gem_version >= Gem::Version.new('7.0.3')
