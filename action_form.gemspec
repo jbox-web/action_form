@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 3.1.0'
 
-  s.files = `git ls-files`.split("\n")
+  s.files = Dir['README.md', 'CHANGELOG.md', 'LICENSE', 'lib/**/*.rb', 'app/**/*.js']
 
   s.add_dependency 'rails', '>= 7.0'
   s.add_dependency 'zeitwerk'
