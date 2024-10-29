@@ -128,7 +128,7 @@ module ActionForm
       return if method_sym == :id=
 
       # call validates/validate class methods
-      if method_sym =~ /^validates?$/ || method_sym == :phony_normalize
+      if method_sym =~ /^validates?$/ || method_sym == :phony_normalize || method_sym == :libphone_normalize
         class_eval do
           public_send(method_sym, *arguments, &block)
         end
