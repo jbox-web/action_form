@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-appraise 'rails_7.0.8' do
-  gem 'rails', '7.0.8'
+appraise 'rails_7.0' do
+  gem 'rails', '~> 7.0.0'
 
   # Fix: LoadError: cannot load such file -- base64
   install_if '-> { Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("3.3.0") }' do
@@ -13,8 +13,8 @@ appraise 'rails_7.0.8' do
   end
 end
 
-appraise 'rails_7.1.3' do
-  gem 'rails', '7.1.3'
+appraise 'rails_7.1' do
+  gem 'rails', '~> 7.1.0'
 
   # Fix:
   # warning: logger was loaded from the standard library, but will no longer be part of the default gems since Ruby 3.5.0.
@@ -24,6 +24,6 @@ appraise 'rails_7.1.3' do
   end
 end
 
-appraise 'rails_7.2.0' do
-  gem 'rails', '7.2.0'
+appraise 'rails_7.2' do
+  gem 'rails', '~> 7.2.0'
 end
