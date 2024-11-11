@@ -4,21 +4,23 @@ source 'https://rubygems.org'
 
 gemspec
 
+# Dev libs
 gem 'appraisal', git: 'https://github.com/thoughtbot/appraisal.git'
-
 gem 'capybara'
 gem 'cuprite'
-gem 'guard-rspec'
 gem 'jquery-rails'
 gem 'puma'
 gem 'rake'
 gem 'rspec-rails'
-gem 'rubocop'
-gem 'rubocop-capybara'
-gem 'rubocop-performance'
-gem 'rubocop-rake'
-gem 'rubocop-rspec'
-gem 'rubocop-rspec_rails'
 gem 'simplecov'
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 2.1.0'
+
+# Dev tools / linter
+gem 'guard-rspec',         require: false
+gem 'rubocop',             require: false
+gem 'rubocop-capybara',    require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rake',        require: false
+gem 'rubocop-rspec',       require: false
+gem 'rubocop-rspec_rails', require: false
