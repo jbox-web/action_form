@@ -18,7 +18,11 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   # set fixtures path
-  config.fixture_path = File.expand_path('fixtures', __dir__)
+  if config.respond_to?(:fixture_paths=)
+    config.fixture_paths = [File.expand_path('fixtures', __dir__)]
+  else
+    config.fixture_path = File.expand_path('fixtures', __dir__)
+  end
 
   # include ActionView::TestCase::Behavior so we can access to @output_buffer in views tests
   config.include ActionView::TestCase::Behavior, file_path: %r{spec/views}
