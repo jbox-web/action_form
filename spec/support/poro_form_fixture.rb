@@ -5,7 +5,7 @@ class Poro
 
   attr_accessor :name, :city
 
-  def save
+  def save # rubocop:disable Naming/PredicateMethod
     true
   end
 end
