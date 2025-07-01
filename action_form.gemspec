@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     'bug_tracker_uri' => 'https://github.com/jbox-web/action_form/issues',
   }
 
-  s.required_ruby_version = '>= 3.1.0'
+  s.required_ruby_version = '>= 3.2.0'
 
   s.files = Dir['README.md', 'CHANGELOG.md', 'LICENSE', 'lib/**/*.rb', 'app/**/*.js']
 

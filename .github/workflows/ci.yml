@@ -24,7 +24,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.2'
 
       - name: Bundler
         run: bundle install
@@ -42,15 +42,11 @@ jobs:
           - '3.4'
           - '3.3'
           - '3.2'
-          - '3.1'
           - 'head'
         rails:
           - rails_8.0
           - rails_7.2
           - rails_7.1
-        exclude:
-          - ruby: '3.1'
-            rails: 'rails_8.0'
 
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.rails }}.gemfile
