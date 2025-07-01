@@ -3,8 +3,8 @@
 [![GitHub license](https://img.shields.io/github/license/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/jbox-web/action_form.svg)](https://github.com/jbox-web/action_form/releases/latest)
 [![CI](https://github.com/jbox-web/action_form/workflows/CI/badge.svg)](https://github.com/jbox-web/action_form/actions)
-[![Code Climate](https://codeclimate.com/github/jbox-web/action_form/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/action_form)
-[![Test Coverage](https://codeclimate.com/github/jbox-web/action_form/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/action_form/coverage)
+[![Maintainability](https://qlty.sh/badges/f8ba0063-7024-4ed0-9d8e-6b754c2959c5/maintainability.svg)](https://qlty.sh/gh/jbox-web/projects/action_form)
+[![Code Coverage](https://qlty.sh/badges/f8ba0063-7024-4ed0-9d8e-6b754c2959c5/test_coverage.svg)](https://qlty.sh/gh/jbox-web/projects/action_form)
 
 Set your models free from the `accepts_nested_attributes_for` helper. ActionForm provides an object-oriented approach to represent your forms by building a form object, rather than relying on Active Record internals for doing this. Form objects provide an API to describe the models involved in the form, their attributes and validations. A form object deals with create/update actions of nested objects in a more seamless way.
 
