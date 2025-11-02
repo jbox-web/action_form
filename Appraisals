@@ -10,5 +10,5 @@ appraise 'rails_8.0' do
 end
 
 appraise 'rails_8.1' do
-  gem 'rails', '~> 8.1.0.rc1'
+  gem 'rails', '~> 8.1.0'
 end

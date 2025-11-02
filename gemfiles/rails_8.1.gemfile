@@ -19,6 +19,6 @@ gem "rubocop-performance", require: false
 gem "rubocop-rake", require: false
 gem "rubocop-rspec", require: false
 gem "rubocop-rspec_rails", require: false
-gem "rails", "~> 8.1.0.rc1"
+gem "rails", "~> 8.1.0"
 
 gemspec path: "../"
