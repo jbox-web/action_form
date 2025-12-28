@@ -43,7 +43,7 @@ jobs:
           - '3.4'
           - '3.3'
           - '3.2'
-          - 'head'
+          # - 'head'
         rails:
           - rails_8.1
           - rails_8.0
