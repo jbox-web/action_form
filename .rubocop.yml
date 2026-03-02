@@ -49,6 +49,10 @@ Style/EmptyMethod:
   Exclude:
     - spec/**/*
 
+Style/OneClassPerFile:
+  Exclude:
+    - spec/support/poro_form_fixture.rb
+
 ##########
 # LAYOUT #
 ##########
