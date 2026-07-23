@@ -166,7 +166,7 @@ module ActionForm
       # key, far above the submitted count, so they never look sequential. Submitting more
       # sequential rows than *records* means the caller sent more than the form allows.
       def enforce_records_limit(params)
-        submitted  = params.size
+        submitted  = params.keys.size
         sequential = params.keys.count { |key| key.to_i < submitted }
         return if sequential <= records
 
