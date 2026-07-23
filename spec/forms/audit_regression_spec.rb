@@ -56,6 +56,15 @@ RSpec.describe('AuditRegression') do
       .to(raise_error(ArgumentError, /No association bogus/))
   end
 
+  # ERR-form_helpers.rb:50 — a nested (Hash-valued) key that is not an <assoc>_attributes
+  # key must raise a clear error, not silently route nowhere.
+  it('raises a clear error for a nested key without the _attributes suffix') do
+    form = ProjectForm.new(Project.new)
+
+    expect { form.submit(owner: { name: 'x' }) }
+      .to(raise_error(ArgumentError, /owner is not a nested-attributes key/))
+  end
+
   # API-form.rb:126 — respond_to? must be consistent with the methods method_missing intercepts.
   it('responds to the DSL methods it intercepts through method_missing') do
     speaker = ConferenceForm.new(Conference.new).speaker
@@ -64,6 +73,14 @@ RSpec.describe('AuditRegression') do
     expect(speaker.respond_to?(:validate)).to(be(true))
     expect(speaker.respond_to?(:id=)).to(be(true))
     expect(speaker.respond_to?(:some_undefined_method)).to(be(false))
+  end
+
+  # form.rb:128 — a genuinely unknown method (not id= nor a forwarded validation) must fall
+  # through method_missing to super and raise NoMethodError, not be swallowed.
+  it('raises NoMethodError for a truly unknown method on a nested form') do
+    speaker = ConferenceForm.new(Conference.new).speaker
+
+    expect { speaker.some_undefined_method }.to(raise_error(NoMethodError))
   end
 
   it('responds to registered external validation methods') do

@@ -5,8 +5,9 @@ require 'simplecov_json_formatter'
 
 # Start SimpleCov
 SimpleCov.start do
+  enable_coverage :branch
   formatter SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter])
-  add_filter 'spec/'
+  skip 'spec/'
 end
 
 # Load Rails dummy app
