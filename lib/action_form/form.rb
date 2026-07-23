@@ -16,7 +16,10 @@ module ActionForm
     include FormHelpers
 
     # Create some getters
-    attr_reader :association_name, :parent, :association_reflection, :proc, :model, :forms, :to_model
+    # *attributes* is tracked per instance: nested forms are built at runtime and share
+    # the ActionForm::Form class, so class-level attribute tracking would grow unbounded
+    # across instantiations and leak attributes between unrelated forms.
+    attr_reader :association_name, :parent, :association_reflection, :proc, :model, :forms, :to_model, :attributes
 
     # Be compliant with AR
     # This object will be passed to *form_for*
@@ -26,18 +29,6 @@ module ActionForm
 
     delegate :model_name, to: :to_model
 
-    class << self
-
-      def attribute_method?(attribute)
-        attributes.include?(attribute.to_sym) || super
-      end
-
-      def attributes
-        @attributes ||= []
-      end
-
-    end
-
     def initialize(association_name, parent, proc, model = nil)
       @association_name       = association_name
       @parent                 = parent
@@ -46,6 +37,7 @@ module ActionForm
       @model                  = assign_model(model)
       @to_model               = FormModelWrapper.new(form: self, model: @model)
       @forms                  = []
+      @attributes             = []
 
       enable_autosave
       instance_eval(&proc)
@@ -53,7 +45,7 @@ module ActionForm
 
     # Form DSL method
     def attribute(name, opts = {})
-      self.class.attributes << name.to_sym
+      attributes << name.to_sym
 
       class_eval do
         validates_presence_of(name) if opts[:required]
@@ -123,12 +115,12 @@ module ActionForm
       form.get_model(assoc_name)
     end
 
-    def method_missing(method_sym, *arguments, &block) # rubocop:disable Style/MissingRespondToMissing
+    def method_missing(method_sym, *arguments, &block)
       # dont break existing tests
       return if method_sym == :id=
 
-      # call validates/validate class methods
-      if method_sym =~ /^validates?$/ || ActionForm.external_validation_methods.include?(method_sym)
+      if forwarded_validation_method?(method_sym)
+        # call validates/validate (and registered external) class methods
         class_eval do
           public_send(method_sym, *arguments, &block)
         end
@@ -138,7 +130,16 @@ module ActionForm
       end
     end
 
+    # Keep *respond_to?* consistent with the methods *method_missing* intercepts.
+    def respond_to_missing?(method_sym, include_private = false)
+      method_sym == :id= || forwarded_validation_method?(method_sym) || super
+    end
+
     private
+
+      def forwarded_validation_method?(method_sym)
+        method_sym.to_s.match?(/\Avalidates?\z/) || ActionForm.external_validation_methods.include?(method_sym)
+      end
 
       def assign_model(model)
         model.nil? ? build_model : model
@@ -165,6 +166,9 @@ module ActionForm
         object.nil? ? parent.public_send(:"build_#{association_name}") : object
       end
 
+      # NOTE: this mutates the shared Active Record association reflection process-wide,
+      # so the association carries autosave semantics everywhere it is used, not only
+      # through this form. It is idempotent (always set to true).
       def enable_autosave
         association_reflection.autosave = true
       end

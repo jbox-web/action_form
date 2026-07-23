@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## Unreleased
+
+* Fix: nested-form attributes were tracked on the shared `ActionForm::Form` class, growing unbounded across instantiations and leaking between unrelated forms; they are now tracked per instance
+* Fix: submitting a nested `id` that matches no loaded child record now raises `ActiveRecord::RecordNotFound` instead of `NoMethodError` on nil
+* Fix: an all-blank new nested row on a persisted parent is now rejected instead of persisted as an empty record (symmetrical with the not-yet-persisted path)
+* Fix: `save` now rolls back the transaction when the root model fails to persist, instead of committing a partial save
+* Fix: malformed nested-attributes keys and attributes for an undeclared association now raise a clear `ArgumentError` instead of `NoMethodError` on nil
+* Add: `ActionForm::TooManyRecords`, raised when a not-yet-persisted collection receives more sequential rows than its `records:` option allows (dynamically added, timestamp-keyed rows are exempt)
+* Add: `respond_to_missing?` so `respond_to?` is consistent with the DSL methods intercepted by `method_missing`
+* Docs: fix README DSL examples (use `attribute`, one per attribute — there is no plural `attributes` macro), document the jQuery requirement of `action_form.js`, fix typos
+* Client-side: anchor the `add_fields` insertion-template regex to a word boundary and drop a dead variable
+
 ## 1.4.0 (2021-01-04)
 
 * Drop support of Ruby 2.4

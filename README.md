@@ -28,7 +28,8 @@ Consider an example where you want to create/update a conference that can have m
 class ConferenceForm < ActionForm::Base
   self.main_model = :conference
 
-  attributes :name, :city
+  attribute :name
+  attribute :city
 
   validates :name, :city, presence: true
 end
@@ -40,11 +41,12 @@ Your form object has to subclass `ActionForm::Base` in order to gain the necessa
 self.main_model = :conference
 ```
 
-To add fields to the form, use the `attributes` or `attribute` class method. The form can also define validation rules for the model it represents. For the `presence` validation rule there is a short inline syntax:
+To add fields to the form, use the `attribute` class method (one attribute per call). The form can also define validation rules for the model it represents. For the `presence` validation rule there is a short inline syntax:
 
 ```ruby
 class ConferenceForm < ActionForm::Base
-  attributes :name, :city, required: true
+  attribute :name, required: true
+  attribute :city, required: true
 end
 ```
 
@@ -59,7 +61,7 @@ The `ActionForm::Base` class provides a simple API with only a few instance/clas
 
 The following are the class methods:
 
-1. `attributes` accepts the names of attributes to define on the form. If you want to declare a presence validation rule for the given attributes, you can pass in the `required: true` option as showcased above. The `attribute` method is aliased to the `attributes` method.
+1. `attribute` defines a single attribute on the form (call it once per attribute). If you want to declare a presence validation rule for the given attribute, you can pass in the `required: true` option as showcased above.
 2. `association(name, options={}, &block)` defines a nested form for the `name` model. If the model is a `has_many` association you can pass in the `records: x` option and fields to create `x` objects will be rendered. If you pass a block, you can define another nested form the same way.
 
 In addition to the main API, forms expose accessors to the defined attributes. This is used for rendering or manual operations.
@@ -139,7 +141,7 @@ class ConferencesController
     @conference_form.submit(conference_params)
 
     if @conference_form.save
-      redirect_to @conference_form, notice: "Conference: #{@conference_form.name} was successfully created." }
+      redirect_to @conference_form, notice: "Conference: #{@conference_form.name} was successfully created."
     else
       render :new
     end
@@ -166,10 +168,12 @@ The form should look like this.
 
 ```ruby
 class ConferenceForm < ActionForm::Base
-  attributes :name, :city, required: true
+  attribute :name, required: true
+  attribute :city, required: true
 
   association :speakers do
-    attributes :name, :occupation, required: true
+    attribute :name,       required: true
+    attribute :occupation, required: true
   end
 end
 ```
@@ -210,13 +214,16 @@ The full form should look like this:
 
 ```ruby
 class ConferenceForm < ActionForm::Base
-  attributes :name, :city, required: true
+  attribute :name, required: true
+  attribute :city, required: true
 
   association :speakers do
-    attribute :name, :occupation, required: true
+    attribute :name,       required: true
+    attribute :occupation, required: true
 
     association :presentation do
-      attribute :topic, :duration, required: true
+      attribute :topic,    required: true
+      attribute :duration, required: true
     end
   end
 end
@@ -251,6 +258,8 @@ ActionForm comes with two helpers to deal with this functionality:
 2. `link_to_remove_association` will display a link to remove a existing/dynamic object.
 
 In order to use it you have to insert this line: `//= require action_form` to your `app/assets/javascript/application.js` file.
+
+> **Note:** the bundled `action_form.js` is a jQuery plugin and expects jQuery (and `jquery_ujs`) to be loaded through the Sprockets asset pipeline. It does not work as-is on a jQuery-free stack (importmap/esbuild + Turbo); on such apps you must provide jQuery yourself or reimplement the `add_fields`/`remove_fields` behavior.
 
 In our `ConferenceForm` we can dynamically create/remove `Speaker` objects. To do that we would write in the `app/views/conferences/_form.html.erb` partial:
 
@@ -307,7 +316,7 @@ Our `app/views/conferences/_speaker_fields.html.erb` would be:
     <%= f.text_field :occupation %>
   </div>
 
-  <h2>Presentantions</h2>
+  <h2>Presentations</h2>
   <%= f.fields_for :presentation do |presentations_fields| %>
     <%= render "presentation_fields", :f => presentations_fields %>
   <% end %>
@@ -350,7 +359,9 @@ The form should look like this.
 
 ```ruby
 class FeedbackForm < ActionForm::Base
-  attributes :name, :body, :email, required: true
+  attribute :name,  required: true
+  attribute :body,  required: true
+  attribute :email, required: true
 end
 ```
 

@@ -17,6 +17,8 @@ module ActionForm
     end
 
     def submit(params)
+      enforce_records_limit(params) unless parent.persisted?
+
       params.each do |key, value|
         value = value.to_h if value.is_a?(ActionController::Parameters)
         if parent.persisted?
@@ -83,7 +85,9 @@ module ActionForm
       def create_or_update_record(attributes)
         if existing_record?(attributes)
           update_record(attributes)
-        else
+        elsif !call_reject_if(attributes)
+          # Symmetrically with the non-persisted path (*create_or_assign_record*), an
+          # all-blank new nested row is rejected instead of persisted as an empty record.
           create_record(attributes)
         end
       end
@@ -106,6 +110,15 @@ module ActionForm
       def update_record(attributes)
         id = attributes[:id]
         form = find_form_by_model_id(id)
+
+        # A submitted id that matches none of the loaded child forms (tampered hidden
+        # field, or a record removed since the form was rendered) must raise a defined
+        # error, as accepts_nested_attributes_for does, not a NoMethodError on nil.
+        if form.nil?
+          klass = parent.class.reflect_on_association(association_name).klass
+          raise ActiveRecord::RecordNotFound.new("Couldn't find #{klass} with ID=#{id} for #{parent.class}")
+        end
+
         assign_to_or_mark_for_destruction(form, attributes)
       end
 
@@ -146,6 +159,18 @@ module ActionForm
 
       def dynamic_key?(key)
         key >= @forms.size
+      end
+
+      # For a not-yet-persisted parent, *records* rows are pre-built with sequential keys
+      # (0..records-1). Rows added dynamically by *link_to_add_association* carry a timestamp
+      # key, far above the submitted count, so they never look sequential. Submitting more
+      # sequential rows than *records* means the caller sent more than the form allows.
+      def enforce_records_limit(params)
+        submitted  = params.size
+        sequential = params.keys.count { |key| key.to_i < submitted }
+        return if sequential <= records
+
+        raise TooManyRecords.new("Maximum #{records} records are allowed. Got #{submitted} records instead.")
       end
 
       REJECT_ALL_BLANK_PROC = proc { |attributes| attributes.all? { |key, value| key == '_destroy' || value.blank? } }

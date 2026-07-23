@@ -105,10 +105,15 @@ RSpec.describe('ConferenceForm') do
   end
 
   it('presentations sub-form raises error if records exceed the allowed number') do
-    skip('TODO')
     params = { name: 'Euruco', city: 'Athens', speaker_attributes: { name: 'Petros Markou', occupation: 'Developer', presentations_attributes: { '0' => { topic: 'Ruby OOP', duration: '1h' }, '1' => { topic: 'Ruby Closures', duration: '1h' }, '2' => { topic: 'Ruby Blocks', duration: '1h' } } } }
-    exception = expect { @form.submit(params) }.to(raise_error(ActionForm::TooManyRecords))
-    expect(exception.message).to(eq('Maximum 2 records are allowed. Got 3 records instead.'))
+    expect { @form.submit(params) }
+      .to(raise_error(ActionForm::TooManyRecords, 'Maximum 2 records are allowed. Got 3 records instead.'))
+  end
+
+  it('presentations sub-form allows a dynamically added record beyond the initial count') do
+    params = { name: 'Euruco', city: 'Athens', speaker_attributes: { name: 'Petros Markou', occupation: 'Developer', presentations_attributes: { '0' => { topic: 'Ruby OOP', duration: '1h' }, '1' => { topic: 'Ruby Closures', duration: '1h' }, '1404292088779' => { topic: 'Ruby Blocks', duration: '1h' } } } }
+    expect { @form.submit(params) }.to_not(raise_error)
+    expect(@form.speaker.presentations.size).to(eq(3))
   end
 
   it('main form saves its model and the models in nested sub-forms') do

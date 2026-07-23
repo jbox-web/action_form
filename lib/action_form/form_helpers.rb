@@ -37,6 +37,8 @@ module ActionForm
       def fill_association_with_attributes(association, attributes)
         assoc_name = find_association_name_in(association).to_sym
         form = find_form_by_assoc_name(assoc_name)
+        raise ArgumentError.new("No association #{assoc_name} declared in #{self.class}") if form.nil?
+
         form.submit(attributes)
       end
 
@@ -44,7 +46,10 @@ module ActionForm
       private_constant :ATTRIBUTES_KEY_REGEXP
 
       def find_association_name_in(key)
-        ATTRIBUTES_KEY_REGEXP.match(key)[1]
+        match = ATTRIBUTES_KEY_REGEXP.match(key)
+        raise ArgumentError.new("#{key} is not a nested-attributes key (expected <association>_attributes)") if match.nil?
+
+        match[1]
       end
 
       def find_form_by_assoc_name(assoc_name)

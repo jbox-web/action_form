@@ -95,15 +95,19 @@ module ActionForm
     end
 
     def save
-      if valid?
-        run_callbacks :save do
-          ActiveRecord::Base.transaction do
-            model.save
-          end
+      return false unless valid?
+
+      saved = false
+      run_callbacks :save do
+        ActiveRecord::Base.transaction do
+          saved = model.save
+          # Roll back the whole graph if the root fails to persist (e.g. a DB-level
+          # constraint or a uniqueness race that *valid?* could not catch) instead of
+          # committing a partial save.
+          raise ActiveRecord::Rollback unless saved
         end
-      else
-        false
       end
+      saved
     end
 
     def save!

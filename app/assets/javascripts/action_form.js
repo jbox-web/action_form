@@ -14,7 +14,7 @@
     var insertionNode = $link.data('association-insertion-node');
     var insertionTraversal = $link.data('association-insertion-traversal');
     var newId = createNewResourceID();
-    var regex = new RegExp("new_" + assoc, "g");
+    var regex = new RegExp("new_" + assoc + "\\b", "g");
     var newContent = content.replace(regex, newId);
 
     if (insertionNode){
@@ -30,7 +30,7 @@
     var contentNode = $(newContent);
     insertionNode.trigger('before-insert', [contentNode]);
 
-    var addedContent = insertionNode[insertionMethod](contentNode);
+    insertionNode[insertionMethod](contentNode);
 
     insertionNode.trigger('after-insert', [contentNode]);
   });
