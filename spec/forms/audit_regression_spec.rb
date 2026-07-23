@@ -92,8 +92,8 @@ RSpec.describe('AuditRegression') do
     ActionForm.external_validation_methods.delete(:validates_phone_number)
   end
 
-  # COR-form_collection.rb:169 — for a non-persisted parent, #submit calls enforce_records_limit,
-  # which must handle ActionController::Parameters (Rails 8.1 has no #size on it), not just Hash.
+  # COR-form_collection.rb:19 — for a non-persisted parent, #submit iterates the params and
+  # must handle ActionController::Parameters keys/values (Rails 8.1), not just a plain Hash.
   it('submits a new-parent nested collection through real strong params (Parameters)') do
     form = ProjectForm.new(Project.new)
     raw = { 'name'             => 'Fresh',

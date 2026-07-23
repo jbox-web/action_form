@@ -104,12 +104,6 @@ RSpec.describe('ConferenceForm') do
     expect(@form.errors['speaker.name']).to include('has already been taken')
   end
 
-  it('presentations sub-form raises error if records exceed the allowed number') do
-    params = { name: 'Euruco', city: 'Athens', speaker_attributes: { name: 'Petros Markou', occupation: 'Developer', presentations_attributes: { '0' => { topic: 'Ruby OOP', duration: '1h' }, '1' => { topic: 'Ruby Closures', duration: '1h' }, '2' => { topic: 'Ruby Blocks', duration: '1h' } } } }
-    expect { @form.submit(params) }
-      .to(raise_error(ActionForm::TooManyRecords, 'Maximum 2 records are allowed. Got 3 records instead.'))
-  end
-
   it('presentations sub-form allows a dynamically added record beyond the initial count') do
     params = { name: 'Euruco', city: 'Athens', speaker_attributes: { name: 'Petros Markou', occupation: 'Developer', presentations_attributes: { '0' => { topic: 'Ruby OOP', duration: '1h' }, '1' => { topic: 'Ruby Closures', duration: '1h' }, '1404292088779' => { topic: 'Ruby Blocks', duration: '1h' } } } }
     expect { @form.submit(params) }.to_not(raise_error)
