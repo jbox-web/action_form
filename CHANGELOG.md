@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+* Fix: a `has_many` form no longer raises `ActiveRecord::StrictLoadingViolationError` on a parent flagged by `config.active_record.strict_loading_by_default`; the collection is read from its cache when loaded, and queried outside the guard otherwise — the caller cannot preload it away, the post-save re-read happening on an already-persisted parent
 * Fix: nested-form attributes were tracked on the shared `ActionForm::Form` class, growing unbounded across instantiations and leaking between unrelated forms; they are now tracked per instance
 * Fix: submitting a nested `id` that matches no loaded child record now raises `ActiveRecord::RecordNotFound` instead of `NoMethodError` on nil
 * Fix: an all-blank new nested row on a persisted parent is now rejected instead of persisted as an empty record (symmetrical with the not-yet-persisted path)

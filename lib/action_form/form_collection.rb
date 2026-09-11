@@ -65,12 +65,32 @@ module ActionForm
       end
 
       def fetch_models
-        associated_records = parent.public_send(association_name)
-
         associated_records.each do |model|
           form = Form.new(association_name, parent, proc, model)
           @forms << form
         end
+      end
+
+
+      # Reads the collection without tripping `strict_loading`.
+      #
+      # An application that turns on `config.active_record.strict_loading_by_default`
+      # flags every record it loads: reading a non-preloaded association then
+      # raises `ActiveRecord::StrictLoadingViolationError`. This particular read
+      # happens when the form is built and again in the `after_save` that syncs
+      # the child forms back — so on a parent that was just created, or loaded
+      # without `includes`. The caller cannot preload its way out of it: by the
+      # time the collection is re-read, the parent is already persisted.
+      #
+      # The guard exists to catch N+1s, and there is none here: one query, once,
+      # for the very collection this form owns. So use the cache when it is
+      # there, and run the query outside the guard when it is not.
+      def associated_records
+        association = parent.association(association_name)
+        return association.target if association.loaded?
+        return parent.public_send(association_name) unless parent.strict_loading?
+
+        association.scope.strict_loading(false).to_a
       end
 
       def initialize_models
